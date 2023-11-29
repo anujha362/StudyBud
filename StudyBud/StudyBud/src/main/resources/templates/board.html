@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="menu">
+<head>
+    <meta charset="UTF-8" >
+    <title>Board</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .pre-scrollable{ height:500px;
+            overflow-y: scroll;
+        }
+        h1 {
+            text-align: center;
+        }
+        .post-button {
+            width: 100%;
+            text-align:center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        .post-info {
+            margin-right: 20px;
+        }
+        .text-box {
+            border: 5px solid #ccc;
+            padding: 20px 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .student-info {
+            border: 5px solid #ccc;
+            padding: 20px 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .timetable {
+            position:relative;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+        }
+        .student-info:hover + .timetable {
+            display: inline-block;
+        }
+        select {
+
+            height: auto;
+            overflow: auto;
+            font-size: 20px;
+            width: 150px;
+            z-index: 1;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            color: #000;
+            background-color: #fff;
+        }
+
+        option {
+            font-size:20px;
+            width: 150px;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1 id = "profile header">Board</h1>
+    <!-- Filter Form -->
+    <form th:action="@{/board/filter}" method="post">
+        <label for="meetingType">Meeting Type:</label>
+        <select id="meetingType" name="meetingType">
+            <!--            <option th:each="type:${distinctMeetingTypes}" th:value="${type}" th:text="${type}"></option>-->
+            <option th:value="Online">Online</option>
+            <option th:value="Offline">Offline</option>
+        </select>
+
+        <label for="openType">Open Type:</label>
+        <select id="openType" name="openType">
+            <!--            <option th:each="opentype:${distinctOpenTypes}" th:value="${opentype}" th:text="${opentype}"></option>-->
+            <option th:value="Public">Public</option>
+            <option th:value="Same_Program">Same Program</option>
+        </select>
+
+        <label for="studentProgram">Student's Program:</label>
+        <select id="studentProgram" name="studentProgram">
+            <option th:each="program:${distinctStudentPrograms}" th:value="${program}" th:text="${program}"></option>
+        </select>
+
+        <label for="studentCourse">Student's Course:</label>
+        <select id="studentCourse" name="studentCourse">
+            <option th:each="course:${distinctStudentCourses}" th:value="${course}" th:text="${course}"></option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <div class="container mt-2 pre-scrollable">
+        <div class="card-header"> </div>
+        <div class="card-body">
+            <!--            <button type="submit" class="post-button">display</button>-->
+            <div th:each="post : ${Post}">
+                <form th:action="@{/displayPost}" method="get">
+                    <table class="interestTable">
+                        <thead>
+                        <tr>
+                            <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="p:${Post}">
+                            <td th:text="${p.getPostID()}"></td>
+                            <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>
+                            <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
+                            <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <!--                <button type="submit" class="post-button">-->
+                    <!--                    <div class="text-box">-->
+                    <!--                        <span th:text="${post.getPostID()}"></span>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="text-box">-->
+                    <!--                        <span th:text="${post.getTitle()}"></span>-->
+                    <!--                    </div>-->
+                    <!--&lt;!&ndash;                    <div class="text-box">&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        <span th:text="${post.getStudent().getFirstName()}"></span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+                    <!--                    <div class="student-info">-->
+                    <!--                        <p th:text="${post.getStudent().getFirstName()}"></p>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="timetable" th:text="${post.getStudent().getLastName()}"></div>-->
+                    <!--                </button>-->
+                </form>
+            </div>
+            <!-- Display Filtered Posts -->
+            <div th:if="${filteredPosts != null}">
+                <div th:each="post : ${filteredPosts}">
+                    <form th:action="@{/displayPost}" method="get">
+                        <table class="interestTable">
+                            <thead>
+                            <tr>
+                                <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p:${Post}">
+                                <td th:text="${p.getPostID()}"></td>
+                                <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>
+                                <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
+                                <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <a class="btn btn-success" th:href="@{createpost}"> Create </a>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="menu">
+<head>
+    <meta charset="UTF-8" >
+    <title>History</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .pre-scrollable{ height:500px;
+            overflow-y: scroll;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1 id = "profile header">History</h1>
+    <div class="container mt-2 pre-scrollable">
+        <div class="card-header"> </div>
+        <div class="card-body">
+
+            <table class="historyTable">
+                <thead>
+                <tr>
+                    <th>Student ID</th><th>Name</th><th>Title</th><th>Rating</th>
+                </tr>
+                </thead>
+                <tbody> <tr th:each="p:${listPosts}">
+                    <td th:text="${p.getPostId()}"></td>
+                    <td th:text="${p.getStudent().getFirstName()} + ${p.getStudent().getLastName()}"></td>
+                    <td th:text="${p.getTitle()}"></td>
+                    <!--                    <td> <div id="rating" class="star-rating">-->
+                    <!--                        <span th:each="ratingValue: ${1..5}"-->
+                    <!--                              th:attr="data-rating=${ratingValue}" class="star"-->
+                    <!--                              th:classappend="${ratingValue == 5} ? 'selected' : ''"></span>-->
+                    <!--                        <input type="hidden" name="rating" class="rating-value" th:value="${5}">-->
+                    <!--                    </div></td>-->
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

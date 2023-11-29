@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="menu">
+<head>
+    <meta charset="UTF-8" >
+    <title>Create Post</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .pre-scrollable{
+            height:500px;
+        <!-- overflow-y: scroll; -->
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1 id = "profile header">Create Post</h1>
+    <div class="container mt-2 pre-scrollable">
+        <div class="card-header"> </div>
+        <div class="card-body">
+
+            <form method="post" th:action="@{/createpost/save}">
+
+                <!-- Title -->
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                           th:value="${post.title}" required>
+                    <span th:errors="${post.title}"></span>
+                </div>
+                <br>
+                <!-- Details -->
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <textarea class="form-control" id="details" name="details" rows="4"
+                              th:value="${post.detail}" required></textarea>
+                    <span th:errors="${post.detail}"></span>
+                </div>
+                <br>
+                <!-- Time Selection -->
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <select class="form-control" id="time" name="time"  th:field="*{post.meetingTime}" required>
+                        <option value="08:00 - 09:00">08:00 - 10:00</option>
+                        <option value="09:00 - 10:00">10:00 - 12:00</option>
+                        <option value="09:00 - 10:00">12:00 - 14:00</option>
+                        <option value="09:00 - 10:00">14:00 - 16:00</option>
+                        <option value="09:00 - 10:00">16:00 - 18:00</option>
+                        <option value="09:00 - 10:00">18:00 - 20:00</option>
+                    </select>
+                </div>
+                <br>
+                <!-- Open To -->
+                <div class="form-group">
+                    <label>Open To</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="public" name="openToPublic"
+                               th:checked="${post.openType}">
+                        <span th:errors="${post.openType}"></span>
+                        <label class="form-check-label" for="public">Public</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="classmate" name="openToClassmate"
+                               th:checked="${post.openType}">
+                        <span th:errors="${post.openType}"></span>
+                        <label class="form-check-label" for="classmate">Classmate</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="programPeer" name="openToProgramPeer"
+                               th:checked="${post.openType}">
+                        <span th:errors="${post.openType}"></span>
+                        <label class="form-check-label" for="programPeer">Program Peer</label>
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label>Meeting Type</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="virtual" name="meetingVirtual"
+                               th:checked="${post.meetingType}">
+                        <span th:errors="${post.meetingType}"></span>
+                        <label class="form-check-label" for="public">Zoom</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="inPerson" name="meetingInPerson"
+                               th:checked="${post.meetingType}">
+                        <span th:errors="${post.meetingType}"></span>
+                        <label class="form-check-label" for="classmate">In person</label>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+</section>
+</body>
+</html>
