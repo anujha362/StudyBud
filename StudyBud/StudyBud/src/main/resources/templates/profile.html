@@ -8,6 +8,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/content.css">
+    <link rel="stylesheet" href="/button.css">
     <script th:inline="javascript">
         var u = [[${session.a}]];
         if(u==1){
@@ -36,23 +38,24 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <label for="name">Name: </label>
-            <input type="text" name="name" id="name" th:value="${Student.firstName}">
+            <table class="tb tb_row">
+                <colgroup>
+                    <col style="width:10%;" /><col style="width:23%;" /><col style="width:10%;" /><col style="width:23%;" />
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td><label for="name"></label><input type="text" name="name" id="name" th:value="${Student.firstName}" readonly = readonly></td>
 
-            <br>
-            <br>
-
-            <label for="studentID">Student ID: </label>
-            <input type="text" name="studentID" id="studentID" th:value="${Student.SID}">
-
-            <br>
-            <br>
-
-            <label for="program">Program: </label>
-            <input type="text" name="program" id="program" th:value="${Student.deptName}">
-
-            <br>
-            <br>
+                    <th scope="row">Student ID</th>
+                    <td><label for="studentID"></label><input type="text" name="studentID" id="studentID" th:value="${Student.SID}" readonly = readonly></td>
+                </tr>
+                <tr>
+                    <th scope="row">Program</th>
+                    <td><label for="program"></label><input type="text" name="program" id="program" th:value="${Student.deptName}" readonly = readonly> </td>
+                </tr>
+                </tbody>
+            </table>
 
 <!--            <h3 th:text="${Student.SID}"></h3>-->
             <h3>Courses:</h3>
@@ -89,6 +92,97 @@
                 </div>
             </div>
 
+
+            <form method="post" th:action="@{/saveFreeTime}" th:object="${ScheduleList}">
+                <table class="tb tb_row" id="freetime">
+                    <tr>
+                        <th>Time</th>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                    <tr th:each="timeSchedule, mStat: ${ScheduleList.timeScheduleList}" >
+                        <!--<td th:text="${'index : ' + mStat.index}"></td>-->
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.time}" th:id="${timeSchedule.time}" th:name="${timeSchedule.time}"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.sunday}" th:id="|sunday,${timeSchedule.time},${timeSchedule.sunday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.monday}" th:id="|monday,${timeSchedule.time},${timeSchedule.monday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.tuesday}" th:id="|tueday,${timeSchedule.time},${timeSchedule.tuesday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.wednesday}" th:id="|wedday,${timeSchedule.time},${timeSchedule.wednesday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.thursday}" th:id="|thuday,${timeSchedule.time},${timeSchedule.thursday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.friday}" th:id="|friday,${timeSchedule.time},${timeSchedule.friday}|"></td>
+                        <td ><input class = "form-control" type="hidden" th:value="${timeSchedule.saturday}" th:id="|satday,${timeSchedule.time},${timeSchedule.saturday}|"></td>
+                        <!--
+                        <td th:if="${timeSchedule.getSunday() == 1}" th:id="|sunday,${timeSchedule.time},${timeSchedule.sunday}|" th:onclick="tdClick([[${timeSchedule.getTime()}]],'sunday',0)" style="background-color: yellow" ></td>
+                        <td th:if="${timeSchedule.getSunday() == 0}" th:id="|sunday,${timeSchedule.time},${timeSchedule.sunday}|" th:onclick="tdClick([[${timeSchedule.getTime()}]],'sunday',1)"> </td>
+
+                        <td th:if="${timeSchedule.sunday == 1}" th:field="${ScheduleList.timeScheduleList.get(mStat.index).sunday}" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.sunday == 0}" th:field="${ScheduleList.timeScheduleList.get(mStat.index).sunday}"> </td>
+                        <td th:if="${timeSchedule.getMonday()  == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'monday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getMonday()  == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'monday',1)" > </td>
+                        <td th:if="${timeSchedule.getTuesday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'tuesday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getTuesday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'tuesday',1)" ></td>
+                        <td th:if="${timeSchedule.getWednesday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'wednesday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getWednesday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'wednesday',1)" ></td>
+                        <td th:if="${timeSchedule.getThursday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'thursday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getThursday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'thursday',1)" ></td>
+                        <td th:if="${timeSchedule.getFriday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'friday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getFriday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'friday',1)" ></td>
+                        <td th:if="${timeSchedule.getSaturday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'saturday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getSaturday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'saturday',1)" ></td>
+                        -->
+                        <!--
+                        <td th:if="${timeSchedule.getSunday() == 1}" th:id="|sunday,${timeSchedule.time},${timeSchedule.sunday}|"  th:onclick="tdClick([[${timeSchedule.getTime()}]],'sunday',0)" style="background-color: yellow" ></td>
+                        <td th:if="${timeSchedule.getSunday() == 0}" th:id="|sunday,${timeSchedule.time},${timeSchedule.sunday}|" th:onclick="tdClick([[${timeSchedule.getTime()}]],'sunday',1)"> </td>
+                        <td th:if="${timeSchedule.getMonday()  == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'monday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getMonday()  == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'monday',1)" > </td>
+                        <td th:if="${timeSchedule.getTuesday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'tuesday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getTuesday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'tuesday',1)" ></td>
+                        <td th:if="${timeSchedule.getWednesday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'wednesday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getWednesday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'wednesday',1)" ></td>
+                        <td th:if="${timeSchedule.getThursday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'thursday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getThursday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'thursday',1)" ></td>
+                        <td th:if="${timeSchedule.getFriday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'friday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getFriday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'friday',1)" ></td>
+                        <td th:if="${timeSchedule.getSaturday() == 1}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'saturday',0)" style="background-color: yellow"></td>
+                        <td th:if="${timeSchedule.getSaturday() == 0}" th:onclick="tdClick([[${timeSchedule.getTime()}]],'saturday',1)" ></td>
+
+                        -->
+                    </tr>
+                </table>
+                <button type="submit" class="btns">Save FreeTime</button>
+            </form>
+
+            <!-- change -->
+            <script type="text/javascript">
+                var table =document.getElementById('freetime');
+                var rowList = table.rows;
+
+                for (i=1; i<rowList.length; i++) {
+
+                    var row = rowList[i];
+                    var tdsNum = row.childElementCount;
+
+                    for (var j = 0; j < tdsNum; j++){
+
+                        var cell = row.cells[j];
+
+                        cell.addEventListener("click", function() {
+                            if(this.style.backgroundColor == "yellow"){
+                                this.style.backgroundColor = "white";
+
+                            }else{
+                                this.style.backgroundColor = "yellow";
+
+                            }
+
+                        });
+                    };//td for
+                }
+            </script>
 
 
 
