@@ -30,50 +30,76 @@ public class HistoryController {
     @Autowired
     private CommentRepository commentRepository;
 
-//    public List<Post> findByStudentId(String studId){
-//
-//        List<Post> unfilteredList = postRepository.findAll();
-//        List<Post> filteredList = new ArrayList<>();
-//        Post post;
-//        Comment comment;
-//        for(int i=0; i< unfilteredList.size();i++)
-//        {
-//            post = unfilteredList.get(i);
-//            if(post.getStudent().getSID().equals(studId))
-//            {
-//                filteredList.add(post);
-//            } else {
-//
-//            List<Comment> unfilteredComments = commentRepository.findAllByPost(post);
-//            for(int j=0; j< unfilteredComments.size(); j++){
-//                comment = unfilteredComments.get(j);
-//                if(comment.getStudent().getSID().equals(studId)){
-//
-//                }
-//            }
-//                if()
-//            }
-//        }
-//
-//
-//    }
+    public List<Post> findByStudentId(Long studId){
+
+
+
+        Student student1 = new Student();
+        student1.setFirstName("Jane");
+        student1.setLastName("Doe");
+        student1.setCID(1000L);
+        student1.setCID(300357917L);
+
+
+        Student student2= new Student();
+        student2.setFirstName("Jackson");
+        student2.setLastName("Danger");
+        student2.setCID(2000L);
+        student2.setCID(300357917L);
+
+        Post post1 = new Post();
+        post1.setStudent(student1);
+        post1.setTitle("Math");
+        post1.setPostID(5555L);
+
+        Post post2 = new Post();
+        post2.setStudent(student2);
+        post2.setTitle("Art");
+        post2.setPostID(6666L);
+        Comment comment1= new Comment();
+        comment1.setStudent(student1);
+        comment1.setPost(post2);
+
+
+        List<Post> unfilteredList = new ArrayList<>();
+        unfilteredList.add(post1);
+        unfilteredList.add(post2);
+//                postRepository.findAll();
+        List<Post> filteredList = new ArrayList<>();
+
+
+        Post post;
+        Comment comment;
+
+        for (Post id : unfilteredList) {
+            post = id;
+            if (post.getStudent().getSID().equals(studId)) {
+                filteredList.add(post);
+            } else {
+
+                List<Comment> unfilteredComments = new ArrayList<>();
+                unfilteredComments.add(comment1);
+//                        commentRepository.findAllByPost(post);
+                for (Comment unfilteredComment : unfilteredComments) {
+                    comment = unfilteredComment;
+                    if (comment.getStudent().getSID().equals(studId)) {
+                        filteredList.add(comment.getPost());
+                    }
+                }
+
+            }
+        }
+
+        return filteredList;
+    }
 
 
     @GetMapping(path = "/history")
-    public String History(Model model) {
+    public String History(Model model, Long studentId) {
 
-//
-//        StudentID studentID = new StudentID(1000L, 300357917L);
-//        Student student1 = new Student();
-//        student1.setFirstName("Jane");
-//        student1.setLastName("Doe");
-//        student1.setCID(1000L);
-//        student1.setCID(300357917L);
-//        Post post1 = new Post();
-//        post1.setStudent(student1);
+    List<Post> postHistory= findByStudentId(studentId);
 
-
-
+    model.addAttribute("History", postHistory);
 
         return "history";
     }

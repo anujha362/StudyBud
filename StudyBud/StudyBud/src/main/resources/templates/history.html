@@ -30,7 +30,7 @@
                     <th>Student ID</th><th>Name</th><th>Title</th><th>Rating</th>
                 </tr>
                 </thead>
-                <tbody> <tr th:each="p:${listPosts}">
+                <tbody> <tr th:each="p:${History}">
                     <td th:text="${p.getPostId()}"></td>
                     <td th:text="${p.getStudent().getFirstName()} + ${p.getStudent().getLastName()}"></td>
                     <td th:text="${p.getTitle()}"></td>
