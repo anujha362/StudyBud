@@ -1,11 +1,11 @@
 package com.project.studybud.web;
 
-import com.project.studybud.entities.Course;
-import com.project.studybud.entities.Interest;
-import com.project.studybud.entities.Student;
-import com.project.studybud.entities.StudentID;
+import com.project.studybud.entities.*;
+import com.project.studybud.models.TimeSchedule;
+import com.project.studybud.models.TimeScheduleList;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.InterestRepository;
+import com.project.studybud.repositories.ScheduleRepository;
 import com.project.studybud.repositories.StudentRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,12 @@ public class StudentController {
 
     @Autowired
     private InterestRepository interestRepository;
+
+    @Autowired
+    private ScheduleRepository scheduleRepository;
+
+    @Autowired
+    AlertController alertController;
     static int num = 0;
 
     @GetMapping(path = "/index")
@@ -53,9 +60,40 @@ public class StudentController {
 //        );
         List<Interest> interests=interestRepository.findByStudent(student);
 
+        List<Schedule> scheduleList = scheduleRepository.findByStudent(student);
+
+        List<TimeSchedule> timeScheduleList = new ArrayList<>();
+        TimeScheduleList newTimeScheduleList = new TimeScheduleList();
+
+        for(int i = 7 ; i <  24; i++){
+            TimeSchedule timeSchedule = new TimeSchedule();
+            timeSchedule.setTime(i);
+            timeScheduleList.add(timeSchedule);
+        }
+
+        for (Schedule schedule : scheduleList) {
+            int idx = schedule.getTime();
+
+            TimeSchedule timeSchedule = new TimeSchedule();
+            timeSchedule.setTime(schedule.getTime());
+            timeSchedule.setMonday(schedule.getMonday());
+            timeSchedule.setTuesday(schedule.getTuesday());
+            timeSchedule.setWednesday(schedule.getWednesday());
+            timeSchedule.setThursday(schedule.getThursday());
+            timeSchedule.setFriday(schedule.getFriday());
+            timeSchedule.setSaturday(schedule.getSaturday());
+            timeSchedule.setSunday(schedule.getSunday());
+
+            timeScheduleList.set(idx - 7, timeSchedule);
+
+
+        }
+        newTimeScheduleList.setTimeScheduleList(timeScheduleList);
+
         model.addAttribute("Student", student);
         model.addAttribute("Courses", courses);
         model.addAttribute("Interest", interests);
+        model.addAttribute("ScheduleList", newTimeScheduleList);
         return "profile";
     }
     @GetMapping("/delete")
