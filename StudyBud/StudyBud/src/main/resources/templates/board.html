@@ -124,7 +124,7 @@
                         <tbody>
                         <tr th:each="p:${Post}">
                             <td th:text="${p.getPostID()}"></td>
-                            <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>
+                            <td th:text="${p.getTitle()}" ><a th:href="@{/PostDetail(id=${p.getPostID()})}"></a></td>
                             <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
                             <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
                         </tr>
