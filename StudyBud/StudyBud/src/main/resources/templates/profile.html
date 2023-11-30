@@ -30,68 +30,96 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content">
-    <h1 id = "profile header">Profile</h1>
-    <div class="container mt-2 pre-scrollable">
-        <div class="card-header"> </div>
-        <div class="card-body">
-
-            <label for="name">Name: </label>
-            <input type="text" name="name" id="name" th:value="${Student.firstName}">
-
-            <br>
-            <br>
-
-            <label for="studentID">Student ID: </label>
-            <input type="text" name="studentID" id="studentID" th:value="${Student.SID}">
-
-            <br>
-            <br>
-
-            <label for="program">Program: </label>
-            <input type="text" name="program" id="program" th:value="${Student.deptName}">
-
-            <br>
-            <br>
-
-<!--            <h3 th:text="${Student.SID}"></h3>-->
-            <h3>Courses:</h3>
-            <ul>
-                <li th:each="course : ${Courses}">
-                    <span th:text="${course.getCourseName()}"></span>
-                    <span th:text="${course.getCourseID()}"></span>
-                </li>
-            </ul>
-
-            <h3>Interests:</h3>
-            <div class="container mt-2 pre-scrollable">
-                <div class="card-header">Student Interest List </div>
-                <div class="card-body">
-                    <form method="post" th:action="@{/formInterests}">
-                        <button  type="submit" class="btn-primary" th:href="@{/formInterests}">Add</button>
-                    </form>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID</th><th>Interest</th>
-                        </tr>
-                        </thead>
-                        <tbody> <tr th:each="p:${Interest}">
-                            <td th:text="${p.id}"></td>
-                            <td th:text="${p.text}"></td>
-                            <td>
-                                <a class="btn btn-danger" onClick="return confirm('Are you sure you want to delete a record ?')" th:href="@{delete(id=${p.id})}">Delete</a>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
+<section layout:fragment="content" style="background-color: #aaa;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">Jaycee Kim</h5>
+                        <p class="text-muted mb-1">Student</p>
+                    </div>
                 </div>
             </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
 
-
-
-
+                            <div class="col-sm-3">
+                                <p class="mb-0" for="name">Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="name" id="name" th:value="${Student.firstName}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0" for="studentID">Student ID</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="studentID" id="studentID" th:value="${Student.SID}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0" for="program">Program:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="program" id="program" th:value="${Student.deptName}">
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">Courses</span>
+                                </p>
+                                <ul>
+                                    <li th:each="course : ${Courses}">
+                                        <div class="col-sm-9">
+                                            <span th:text="${course.getCourseName()}"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">Interest</span>
+                                </p>
+                                <form method="post" th:action="@{/formInterests}">
+                                    <button  type="submit" class="btn-primary" th:href="@{/formInterests}">Add</button>
+                                </form>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th><th>Interest</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody> <tr th:each="p:${Interest}">
+                                        <td th:text="${p.id}"></td>
+                                        <td th:text="${p.text}"></td>
+                                        <td>
+                                            <a class="btn btn-danger" onClick="return confirm('Are you sure you want to delete a record ?')" th:href="@{delete(id=${p.id})}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
