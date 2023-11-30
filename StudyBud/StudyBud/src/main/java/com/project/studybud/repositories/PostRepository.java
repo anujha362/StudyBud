@@ -11,6 +11,13 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
     List<Post> findAllByPostID(Long postID);
+    @Query("SELECT p FROM Post p WHERE p.student.cID = :cId AND p.student.sID = :sId " +
+            "UNION \n" +
+            "SELECT a \n" +
+            "  FROM Post a \n" +
+            "  JOIN Comment b ON a.postID = b.post.postID \n" +
+            " WHERE b.student.cID = :cId AND b.student.sID = :sId ")
+    List<Post> findAllByStudent(Long cId, Long sId);
 
     @Override
     List<Post> findAll();
