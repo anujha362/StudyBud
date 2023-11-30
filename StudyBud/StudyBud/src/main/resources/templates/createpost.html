@@ -27,7 +27,7 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <form method="post" th:action="@{/createpost/save}">
+            <form method="post" th:action="@{/createpost/save}" th:object="${Post}">
 
                 <!-- Title -->
                 <div class="form-group">
