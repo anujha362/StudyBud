@@ -97,11 +97,6 @@
             <option th:value="Same_Program">Same Program</option>
         </select>
 
-        <label for="studentProgram">Student's Program:</label>
-        <select id="studentProgram" name="studentProgram">
-            <option th:each="program:${distinctStudentPrograms}" th:value="${program}" th:text="${program}"></option>
-        </select>
-
         <label for="studentCourse">Student's Course:</label>
         <select id="studentCourse" name="studentCourse">
             <option th:each="course:${distinctStudentCourses}" th:value="${course}" th:text="${course}"></option>

@@ -15,11 +15,11 @@ public interface PostRepository extends JpaRepository<Post,Long> {
     @Override
     List<Post> findAll();
 
-    @Query("SELECT DISTINCT c.CourseName  FROM Course c")
-    List<String> findDistinctStudentCourses();
+//    @Query("SELECT DISTINCT c.CourseName  FROM Course c")
+//    List<String> findDistinctStudentCourses();
 
     @Query("SELECT DISTINCT s.deptName FROM Student s")
-    List<String> findDistinctStudentPrograms();
+    String findDistinctStudentPrograms();
 
 //
 //    List<Post> findPostByMeetingTypeContainingIgnoreCaseAndStudentDeptName(String meetingType, String student_deptName);
