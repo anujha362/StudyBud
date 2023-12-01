@@ -28,8 +28,8 @@
             margin-right: 20px;
         }
         .text-box {
-            border: 5px solid #ccc;
-            padding: 20px 20px;
+            /*border: 5px solid #ccc;*/
+            /*padding: 20px 20px;*/
             margin-bottom: 10px;
             display: inline-block;
             margin-left: 20px;
@@ -37,8 +37,8 @@
         }
 
         .student-info {
-            border: 5px solid #ccc;
-            padding: 20px 20px;
+            /*border: 5px solid #ccc;*/
+            /*padding: 20px 20px;*/
             margin-bottom: 10px;
             display: inline-block;
             margin-left: 20px;
@@ -85,14 +85,12 @@
     <form th:action="@{/board/filter}" method="post">
         <label for="meetingType">Meeting Type:</label>
         <select id="meetingType" name="meetingType">
-            <!--            <option th:each="type:${distinctMeetingTypes}" th:value="${type}" th:text="${type}"></option>-->
             <option th:value="Online">Online</option>
             <option th:value="Offline">Offline</option>
         </select>
 
         <label for="openType">Open Type:</label>
         <select id="openType" name="openType">
-            <!--            <option th:each="opentype:${distinctOpenTypes}" th:value="${opentype}" th:text="${opentype}"></option>-->
             <option th:value="Public">Public</option>
             <option th:value="Same_Program">Same Program</option>
         </select>
@@ -105,7 +103,7 @@
         <button type="submit">Filter</button>
     </form>
 
-    <div class="card d-flex" style="width: 48rem">
+    <div class="container mt-2 pre-scrollable" style="width: 60rem">
         <div class="card-body">
             <!--Table-->
             <table class="table-responsive">
@@ -125,13 +123,10 @@
                 <tbody>
                 <tr th:each="p:${Post}">
                     <td scope="row" class="text-nowrap" th:text="${p.getPostID()}"></td>
-                    <td class="text-start" th:text="${p.getTitle()}">
-                        <a href="displayPost.html" class="font-weight-bold blue-text">
+                    <td class="text-start" >
+                        <a href="postDetail.html" th:href="@{/PostDetail(id=${p.getPostID()})}" class="font-weight-bold blue-text" th:text="${p.getTitle()}">
                         </a>
                         <div class="my-2">
-                            <a href="#" class="blue-text">
-                                <strong>MDBootstrap</strong>
-                            </a>
                             <span class="badge bg-secondary mx-1" th:text="${p.getMeetingType()}"></span><span
                                 class="badge bg-primary mx-1" th:text="${p.getOpenType()}"></span>
                             <span th:text="${p.getCreatedData()}"></span>
