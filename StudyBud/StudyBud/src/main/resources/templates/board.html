@@ -82,6 +82,7 @@
 
     <h1 id = "profile header">Board</h1>
     <!-- Filter Form -->
+
     <form th:action="@{/board/filter}" method="post">
         <label for="meetingType">Meeting Type:</label>
         <select id="meetingType" name="meetingType">
@@ -103,8 +104,9 @@
 
         <button type="submit">Filter</button>
     </form>
+    </div>
 
-    <div class="container mt-2 pre-scrollable" style="width: 60rem">
+
         <div class="card-body">
             <!--Table-->
             <table class="table-responsive">
@@ -263,11 +265,11 @@
 <!--                        </table>-->
 <!--                    </form>-->
 <!--                </div>-->
-<!--            </div>-->
+            </div>
 
             <a class="btn btn-success" th:href="@{createpost}"> Create </a>
 
-<!--        </div>-->
+        </div>
 <!--    </div>-->
 </section>
 </body>

@@ -10,16 +10,14 @@ import com.project.studybud.repositories.PostRepository;
 import com.project.studybud.repositories.StudentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -105,8 +103,11 @@ public class BoardController {
     }
 
 
-    @PostMapping (path = "postsave")
-    public String postSave(Model model, Post post, BindingResult bindingResult, ModelMap modelMap, HttpSession httpSession, HttpServletRequest request) {
+
+    @PostMapping (path = "/postsave")
+    public String postSave(Model model,  Post post, BindingResult bindingResult, ModelMap modelMap,
+                           HttpSession httpSession, HttpServletRequest request) {
+
 
         if (bindingResult.hasErrors()) {
             return "createpost";
@@ -124,14 +125,22 @@ public class BoardController {
             postRepository.save(post);
 
             return "redirect:board";
+
         }
 
     }
 
 
 
-    @GetMapping(path = "/editpost")
-    public String EditPost(Model model) {
+    @GetMapping(path = "/editpost/{id}")
+    public String EditPost(@PathVariable("id") Long id,
+                           Model model, HttpSession httpSession) {
+
+        httpSession.setAttribute("info", 0);
+
+        Post post = postRepository.findById(id).orElse(null);
+        if(post == null) throw new RuntimeException("Post does not exist");
+        model.addAttribute("post", post);
 
         return "editpost";
     }
