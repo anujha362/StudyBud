@@ -96,7 +96,8 @@
         </select>
 
         <label for="studentCourse">Student's Course:</label>
-        <select id="studentCourse" name="studentCourse">
+        <select id="studentCourse" th:field="*{distinctStudentCourses}" name="studentCourse">
+            <option value="">ALL</option>
             <option th:each="course:${distinctStudentCourses}" th:value="${course}" th:text="${course}"></option>
         </select>
 
@@ -264,7 +265,7 @@
 <!--                </div>-->
 <!--            </div>-->
 
-<!--            <a class="btn btn-success" th:href="@{createpost}"> Create </a>-->
+            <a class="btn btn-success" th:href="@{createpost}"> Create </a>
 
 <!--        </div>-->
 <!--    </div>-->
