@@ -15,10 +15,9 @@ public interface CourseRepository extends JpaRepository<Course, CourseID> {
     //List<Course> findByCIDAndSID(Long cID, Long sID);
 
     List<Course> findByStudent(Student student);
-    @Query("SELECT DISTINCT c.CourseName FROM Course c " +
-            "JOIN Post p ON c.student.sID = p.student.sID  " +
-            "WHERE p.student.sID = :studentId")
-    List<String> findDistinctCourseNamesByStudentId(@Param("studentId") Long studentId);
+    @Query("SELECT c.CourseName FROM Course c " +
+            "WHERE c.cID = :cId AND c.sID = :sId")
+    List<String> findDistinctCourseNamesByStudentId(Long cId, Long sId);
 
 
 }

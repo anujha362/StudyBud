@@ -3,9 +3,12 @@ package com.project.studybud.web;
 import com.project.studybud.common.CommonConstants;
 import com.project.studybud.entities.Post;
 import com.project.studybud.entities.Student;
+import com.project.studybud.entities.StudentID;
+import com.project.studybud.models.PostTitle;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
 import com.project.studybud.repositories.StudentRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -34,9 +37,9 @@ public class BoardController {
         return postRepository.findById(postId).orElse(null);
     }
 
-    List<String> getDistinctStudentCourses(long studentID) {
+    List<String> getDistinctStudentCourses(long CollegeId, long studentID) {
 
-        return courseRepository.findDistinctCourseNamesByStudentId(studentID);
+        return courseRepository.findDistinctCourseNamesByStudentId(CollegeId, studentID);
     }
     String getDistinctStudentPrograms(){
 
@@ -51,9 +54,18 @@ public class BoardController {
 
 
     @GetMapping(path = "/board")
-    public String Board(Model model) {
-        List<Post> post= postRepository.findAll();
+    public String Board(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+
+        Long cID = (Long) session.getAttribute("CollegeId");
+        Long sID = (Long) session.getAttribute("studentId");
+        List<String> distinctCourseNames = getDistinctStudentCourses(cID,sID);
+
+        List<PostTitle> post= postRepository.findAllByFilterDefaultWithJPQL(cID,sID);
+
         model.addAttribute("Post",post);
+        model.addAttribute("distinctStudentCourses", distinctCourseNames);
         return "board";
     }
     @GetMapping(path = "/displayPost")
@@ -67,10 +79,15 @@ public class BoardController {
             @RequestParam(name = "meetingType", required = false) String meetingType,
             @RequestParam(name = "openType", required = false) String openType,
             @RequestParam(name = "studentCourse", required = false) String studentCourse,
-            Model model,long postID) {
+            Model model,long postID, HttpServletRequest request) {
         String studentProgram = getDistinctStudentPrograms();
         Post posts = getPostById(postID);
-        List<String> distinctCourseNames = getDistinctStudentCourses(posts.getStudent().getSID());
+
+        HttpSession session = request.getSession();
+        Long cID = (Long) session.getAttribute("CollegeId");
+        Long sID = (Long) session.getAttribute("studentId");
+        List<String> distinctCourseNames = getDistinctStudentCourses(cID,sID);
+
         List<Post> filteredPosts = filterPosts(meetingType,openType,studentProgram,studentCourse);
         model.addAttribute("filteredPosts", filteredPosts);
         model.addAttribute("distinctStudentCourses", distinctCourseNames);
@@ -86,9 +103,11 @@ public class BoardController {
     }
 
 
+
     @PostMapping (path = "/postsave")
     public String postSave(Model model,  Post post, BindingResult bindingResult, ModelMap modelMap,
                            HttpSession httpSession, HttpServletRequest request) {
+
 
         if (bindingResult.hasErrors()) {
             return "createpost";
