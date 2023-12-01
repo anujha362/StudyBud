@@ -1,21 +1,20 @@
 package com.project.studybud.web;
 
+import com.project.studybud.common.CommonConstants;
 import com.project.studybud.entities.Post;
 import com.project.studybud.entities.Student;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
 import com.project.studybud.repositories.StudentRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -87,32 +86,42 @@ public class BoardController {
     }
 
 
-    @PostMapping (path = "postsave")
-    public String postSave(Model model, Post post, BindingResult bindingResult, ModelMap modelMap, HttpSession httpSession) {
+    @PostMapping (path = "/postsave")
+    public String postSave(Model model,  Post post, BindingResult bindingResult, ModelMap modelMap,
+                           HttpSession httpSession, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             return "createpost";
         } else {
+            HttpSession session = request.getSession();
+            Long cID = (Long) session.getAttribute("CollegeId");
+            Long sID = (Long) session.getAttribute("studentId");
+
+            Student student = new Student();
+            student.setCID(cID);
+            student.setSID(sID);
+            post.setStudent(student);
+            post.setCreatedData(CommonConstants.localDateTime);
+            post.setModifiedData(CommonConstants.localDateTime);
             postRepository.save(post);
 
-            if (num == 2) {
-                modelMap.put("e", 2);
-                modelMap.put("a", 0);
-
-            } else {
-                modelMap.put("a", 1);
-                modelMap.put("e", 0);
-            }
-
             return "redirect:board";
+
         }
 
     }
 
 
 
-    @GetMapping(path = "/editpost")
-    public String EditPost(Model model) {
+    @GetMapping(path = "/editpost/{id}")
+    public String EditPost(@PathVariable("id") Long id,
+                           Model model, HttpSession httpSession) {
+
+        httpSession.setAttribute("info", 0);
+
+        Post post = postRepository.findById(id).orElse(null);
+        if(post == null) throw new RuntimeException("Post does not exist");
+        model.addAttribute("post", post);
 
         return "editpost";
     }
