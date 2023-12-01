@@ -4,6 +4,7 @@ import com.project.studybud.common.CommonConstants;
 import com.project.studybud.entities.Post;
 import com.project.studybud.entities.Student;
 import com.project.studybud.entities.StudentID;
+import com.project.studybud.models.PostTitle;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
 import com.project.studybud.repositories.StudentRepository;
@@ -62,7 +63,8 @@ public class BoardController {
         Long cID = (Long) session.getAttribute("CollegeId");
         Long sID = (Long) session.getAttribute("studentId");
         List<String> distinctCourseNames = getDistinctStudentCourses(cID,sID);
-        List<Post> post= postRepository.findAll();
+
+        List<PostTitle> post= postRepository.findAllByFilterDefaultWithJPQL(cID,sID);
 
         model.addAttribute("Post",post);
         model.addAttribute("distinctStudentCourses", distinctCourseNames);
