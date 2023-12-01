@@ -27,7 +27,7 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <form method="post" th:action="@{postsave}">
+            <form method="post" th:action="@{/postsave}">
 
 
                 <div class="container">
@@ -37,19 +37,19 @@
                         <label>Open To</label>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="public" name="openTo"
-                                   th:checked="${post.openType == 'Public'}">
+                                 th:value="Public" th:field="${post.openType}"  th:checked="${post.openType}">
 
                             <label class="form-check-label" for="public">Public</label>
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="classmate" name="openTo"
-                                   th:checked="${post.openType == 'Classmate'}">
+                                   th:value="Classmate" th:field="${post.openType}"  th:checked="${post.openType}">
 
                             <label class="form-check-label" for="classmate">Classmate</label>
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="programPeer" name="openTo"
-                                   th:checked="${post.openType == 'Program Peer'}">
+                                   th:value="ProgramPeer" th:field="${post.openType}" th:checked="${post.openType}">
 
                             <label class="form-check-label" for="programPeer">Program Peer</label>
                         </div>
@@ -61,13 +61,13 @@
                         <label>Meeting Type</label>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="virtual" name="meetingType"
-                                   th:checked="${post.meetingType}">
-                            <span th:errors="${post.meetingType}"></span>
+                                    th:field="${post.meetingType}" th:value="Zoom" th:checked="${post.meetingType}">
+                            <span th:errors="*{post.meetingType}"></span>
                             <label class="form-check-label" for="public">Zoom</label>
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="inPerson" name="meetingType"
-                                   th:checked="${post.meetingType}">
+                                   th:field="${post.meetingType}" th:value="In-person"  th:checked="${post.meetingType}">
                             <span th:errors="${post.meetingType}"></span>
                             <label class="form-check-label" for="classmate">In person</label>
                         </div>
@@ -148,8 +148,8 @@
                 <div class="form-group">
                     <label for="details">Details</label>
                     <textarea class="form-control" id="details" name="details" rows="4"
-                              th:value="${post.detail}" required></textarea>
-                    <span th:errors="${post.detail}"></span>
+                              th:field="*{post.detail}" required></textarea>
+                    <span th:errors="*{post.detail}"></span>
                 </div>
                 <br>
 
