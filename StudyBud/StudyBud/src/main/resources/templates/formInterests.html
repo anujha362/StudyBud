@@ -11,7 +11,7 @@
     <style>
 
         body{
-            background-color:#679B99;
+            background-color:#f2f2f3;
             padding: 90px;
             display: flex;
 
@@ -19,7 +19,7 @@
 
         }
         .form-block{
-            background-color:#226764;
+            background-color: #d7d9da;
             padding: 50px;
             height: 300px;
             width: 700px;
@@ -28,6 +28,10 @@
             justify-content: center;
             font-size: large;
 
+        }
+
+        img{
+            padding-right: 20px;
         }
         .form-control {
             margin: 10px;
@@ -46,6 +50,8 @@
 <body>
 
 <div class="form-block">
+
+    <img src="https://cdn.pixabay.com/photo/2021/01/24/19/08/book-5946219_1280.jpg">
     <section layout:fragment="content">
         <div class="col-md-6 offset-3">
             <form method="post" th:action="@{/save}" th:object="${Interest}">
