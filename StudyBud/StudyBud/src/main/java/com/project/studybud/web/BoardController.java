@@ -1,7 +1,9 @@
 package com.project.studybud.web;
 
+import com.project.studybud.common.CommonConstants;
 import com.project.studybud.entities.Post;
 import com.project.studybud.entities.Student;
+import com.project.studybud.entities.StudentID;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
 import com.project.studybud.repositories.StudentRepository;
@@ -93,16 +95,13 @@ public class BoardController {
         if (bindingResult.hasErrors()) {
             return "createpost";
         } else {
+            Student student = new Student();
+            student.setCID(1000L);
+            student.setSID(300357917L);
+            post.setStudent(student);
+            post.setCreatedData(CommonConstants.localDateTime);
+            post.setModifiedData(CommonConstants.localDateTime);
             postRepository.save(post);
-
-            if (num == 2) {
-                modelMap.put("e", 2);
-                modelMap.put("a", 0);
-
-            } else {
-                modelMap.put("a", 1);
-                modelMap.put("e", 0);
-            }
 
             return "redirect:board";
         }

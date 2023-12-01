@@ -27,7 +27,7 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <form method="post" th:action="@{/createpost/save}">
+            <form method="post" th:action="@{/postsave}">
 
 
                 <div class="container">
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <label for="details">Details</label>
                     <textarea class="form-control" id="details" name="details" rows="4"
-                              th:value="${post.detail}" required></textarea>
+                              th:text="${post.detail}" required></textarea>
                     <span th:errors="${post.detail}"></span>
                 </div>
                 <br>
@@ -100,7 +100,7 @@
                 <!-- Time Selection -->
                 <div class="form-group">
                     <label for="time">Time:</label>
-                    <select class="form-control" id="time" name="time"  th:field="*{post.meetingTime}" required>
+                    <select class="form-control" id="time" name="time"  >
 
                         <!--                        <option value="08:00 - 09:00">08:00 - 10:00</option>-->
                         <!--                        <option value="09:00 - 10:00">10:00 - 12:00</option>-->
