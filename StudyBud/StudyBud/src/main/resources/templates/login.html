@@ -12,32 +12,57 @@
     <link rel="stylesheet" href="/login.css">
     <link rel="stylesheet" href="/content.css">
     <link rel="stylesheet" href="/button.css">
+
 </head>
 
-<body class="text-center">
-<th:block layout:fragment="content">
-    <div class="login_wrapper" style="margin: calc(50vh - 193px) auto;">
-        <h1>WELCOME</h1>
-        <form method="post" th:action="@{/login}" th:object="${student}">
-            <div>
-                <input type="text"  class="form-control" th:field="*{SID}" placeholder="Student ID" autocomplete="off" required/>
+<body>
+<section class="vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5 text-center">
+                <h1 class="display-4 text-primary">Welcome to StudyBud</h1>
             </div>
-            <div style="margin-bottom: 50px;">
-                <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required/>
+        </div>
+<th:block layout:fragment="content">
+    <div class="login_wrapper container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100 pt-10">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="login.png" class="img-fluid"
+                     alt="Sample image">
+            </div>
+
+         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form method="post" th:action="@{/login}" th:object="${student}">
+
+            <div class="form-outline mb-4">
+                <input type="text"  class="form-control form-control-lg" th:field="*{SID}" placeholder="Student ID" autocomplete="off" required/>
+            </div>
+
+            <div class="form-outline mb-3">
+                <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" autocomplete="off" required/>
             </div>
             <div>
                 <input type="hidden"  class="form-control" th:field="*{CID}"/>
             </div>
             <div>
-                <button type="submit" class="btn btn-info form-control" id="btn_login">Login</button>
+                <button type="submit" class="btn btn-primary btn-lg form-control mb-3" id="btn_login">Login</button>
             </div>
         </form>
-        <hr class="separator"/>
-        <div>
-            <h1>STUDYBUD</h1>
-            <p>©2023 All Rights Reserved.</p>
         </div>
+        <hr class="separator mt-lg-4"/>
+    </div>
     </div>
 </th:block>
+    </div>
+</section>
 </body>
+<footer>
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        <!-- Copyright -->
+        <div class="text-white text-center mb-3 mb-md-0">
+            Copyright © 2023. All rights reserved.
+        </div>
+        <!-- Copyright -->
+    </div>
+</footer>
 </html>

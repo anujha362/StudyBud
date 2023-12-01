@@ -24,22 +24,19 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <table class="historyTable">
+            <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Student ID</th><th>Name</th><th>Title</th><th>Rating</th>
+                    <th scope="col">Student ID</th><th scope="col">Name</th><th scope="col">Title</th><th scope="col">Rating</th>
                 </tr>
                 </thead>
-                <tbody> <tr th:each="p:${listPosts}">
-                    <td th:text="${p.getPostId()}"></td>
+                <tbody> <tr th:each="p:${History}">
+                    <td th:text="${p.postID}"></td>
                     <td th:text="${p.getStudent().getFirstName()} + ${p.getStudent().getLastName()}"></td>
                     <td th:text="${p.getTitle()}"></td>
-                    <!--                    <td> <div id="rating" class="star-rating">-->
-                    <!--                        <span th:each="ratingValue: ${1..5}"-->
-                    <!--                              th:attr="data-rating=${ratingValue}" class="star"-->
-                    <!--                              th:classappend="${ratingValue == 5} ? 'selected' : ''"></span>-->
-                    <!--                        <input type="hidden" name="rating" class="rating-value" th:value="${5}">-->
-                    <!--                    </div></td>-->
+                    <td> <div id="rating" class="star-rating">
+
+                    </div></td>
                 </tr>
                 </tbody>
             </table>

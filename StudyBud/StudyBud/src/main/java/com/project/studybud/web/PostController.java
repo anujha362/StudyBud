@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PostController {
@@ -203,5 +205,41 @@ public class PostController {
         return commentRepository.findAllByPost(postDetail);
     }
 
+
+    @GetMapping(path = "/Dashboard")
+    public String chartTest(Model model) {
+        List<Map<Object,Object>> dataPoints1 = new ArrayList<Map<Object,Object>>();
+        Map<Object , Object> map1 = new HashMap<Object,Object>();
+
+        map1.put("label", "Chrome");
+
+        map1.put("y", 51.08);
+
+        dataPoints1.add(map1);
+
+
+
+        Map<Object , Object> map2 = new HashMap<Object,Object>();
+
+        map2.put("label", "Internet Explorer");
+
+        map2.put("y", 27.34);
+
+        dataPoints1.add(map2);
+
+
+
+        Map<Object , Object> map3 = new HashMap<Object,Object>();
+
+        map3.put("label", "Firefox");
+
+        map3.put("y", 10.62);
+
+        dataPoints1.add(map3);
+
+        model.addAttribute("dataPointsList", dataPoints1);
+
+        return "dashboard";
+    }
 
 }
