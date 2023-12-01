@@ -1,0 +1,47 @@
+
+/* Login */
+#login_wrap * {font-weight:400; letter-spacing:0;}
+#login_wrap {background:#e8ebf0; width:100%; height:100%; min-width:700px; min-height:400px; position:absolute; top:0;}
+
+/* table th td */
+.tb {width:100%; border:1px solid #dedede; margin-top:20px;}
+.tb:first-child {margin-top:0;}
+.tb th, .tb td {border:1px solid #dedede; padding:10px 5px; box-sizing:border-box;}
+.tb th {color:#555;}
+
+.tb_col th {border-bottom:1px solid #a2a2a2;}
+.tb_col td {text-align:center;}
+.tb_col thead th {background:#6f8294; border-color:rgba(255,255,255,0.2); color:#fff;}
+.tb_col tbody tr:nth-child(even) {background:#f6f7f8;}
+.tb_col .no_data_msg {padding:50px 0;}
+
+.tb_row {border-top:2px solid #6f8294;}
+.tb_row th, .tb_row td {padding:8px 12px;}
+.tb_row th {background:#f6f7f8; text-align:left;}
+.tb_row td {height:40px;}
+.tb_row .btns {height:38px; line-height:38px;}
+
+/* comment */
+.cm_write {margin:4% 0 15px 0;}
+.cm_write input[type="text"], .cm_write input[type="password"], .cm_write textarea, .cm_list .cm_re_input textarea {padding:10px;}
+.cm_write .cm_writer {margin-bottom:5px;}
+.cm_write .cm_writer label {color:#111; margin-right:10px;}
+.cm_write .cm_writer input:first-child {width:100px; margin-left:0;}
+.cm_write .cm_writer input {width:130px; background:none; padding:5px 1%;}
+.cm_write .wr_input {overflow:hidden; max-width:360px; margin-bottom:0.7%;}
+.cm_write .wr_input > span {float:left; width:49%;}
+.cm_write .wr_input > span + span {margin-left:2%;}
+.cm_write .wr_input input {border:1px solid #ccc;}
+.cm_write .cm_input {position:relative; background:#fff; border:1px solid #ccc;}
+.cm_write .cm_input > span {display:block; text-align:right; position:relative;}
+.cm_write .cm_input > span i {position:absolute; top:11px; left:10px; font-size:13px; color:#999;}
+.cm_input textarea {width:100%; height:90px; background:#f9f9f9; border:0; border-bottom:1px solid #ccc;}
+.cm_input .btns {width:76px; height:40px; line-height:38px; background:#139dc8; border-radius:0; color:#fff; padding:0; margin:0; font-size:15px; position:relative; right:-1px;}
+
+.pre-scrollable{ height:500px;
+    overflow-y: scroll;
+}
+
+h1 {
+    text-align: center;
+}

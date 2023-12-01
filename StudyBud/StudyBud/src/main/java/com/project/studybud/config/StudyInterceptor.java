@@ -2,6 +2,7 @@ package com.project.studybud.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,15 @@ public class StudyInterceptor implements HandlerInterceptor {
             || request.getRequestURL().toString().contains("/login")
                 || request.getRequestURL().toString().contains("/logout")) {
             return true;
+        }
+
+        HttpSession session = request.getSession();
+
+        //Check if session is expired. if yes, then redirect to login page
+        if(session.getAttribute("studentId") == null) {
+            session.invalidate();
+            log.debug("Session has been expired!!");
+            response.sendRedirect(request.getContextPath() + "/login/index");
         }
 
         return true;
