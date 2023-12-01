@@ -46,4 +46,6 @@ public class Post {
 
     private LocalDateTime modifiedData;
 
+    private Integer studentRating;
+
 }

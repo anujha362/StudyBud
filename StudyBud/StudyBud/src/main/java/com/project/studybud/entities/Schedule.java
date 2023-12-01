@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Time;
 
 @Data
 @AllArgsConstructor
@@ -29,12 +26,16 @@ public class Schedule {
     private Student student;
 
     @Id
-    private Integer day;
+    private Integer Time;
 
-    @Id
-    private Time startTime;
+    private Integer Monday;
+    private Integer Tuesday;
+    private Integer Wednesday;
+    private Integer Thursday;
+    private Integer Friday;
+    private Integer Saturday;
+    private Integer Sunday;
 
-    private Time endTime;
 
 }
 

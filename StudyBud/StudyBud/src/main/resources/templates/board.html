@@ -28,8 +28,8 @@
             margin-right: 20px;
         }
         .text-box {
-            border: 5px solid #ccc;
-            padding: 20px 20px;
+            /*border: 5px solid #ccc;*/
+            /*padding: 20px 20px;*/
             margin-bottom: 10px;
             display: inline-block;
             margin-left: 20px;
@@ -37,8 +37,8 @@
         }
 
         .student-info {
-            border: 5px solid #ccc;
-            padding: 20px 20px;
+            /*border: 5px solid #ccc;*/
+            /*padding: 20px 20px;*/
             margin-bottom: 10px;
             display: inline-block;
             margin-left: 20px;
@@ -79,26 +79,20 @@
 </head>
 <body>
 <section layout:fragment="content">
+
     <h1 id = "profile header">Board</h1>
     <!-- Filter Form -->
     <form th:action="@{/board/filter}" method="post">
         <label for="meetingType">Meeting Type:</label>
         <select id="meetingType" name="meetingType">
-            <!--            <option th:each="type:${distinctMeetingTypes}" th:value="${type}" th:text="${type}"></option>-->
             <option th:value="Online">Online</option>
             <option th:value="Offline">Offline</option>
         </select>
 
         <label for="openType">Open Type:</label>
         <select id="openType" name="openType">
-            <!--            <option th:each="opentype:${distinctOpenTypes}" th:value="${opentype}" th:text="${opentype}"></option>-->
             <option th:value="Public">Public</option>
             <option th:value="Same_Program">Same Program</option>
-        </select>
-
-        <label for="studentProgram">Student's Program:</label>
-        <select id="studentProgram" name="studentProgram">
-            <option th:each="program:${distinctStudentPrograms}" th:value="${program}" th:text="${program}"></option>
         </select>
 
         <label for="studentCourse">Student's Course:</label>
@@ -109,74 +103,171 @@
         <button type="submit">Filter</button>
     </form>
 
-    <div class="container mt-2 pre-scrollable">
-        <div class="card-header"> </div>
+    <div class="container mt-2 pre-scrollable" style="width: 60rem">
         <div class="card-body">
-            <!--            <button type="submit" class="post-button">display</button>-->
-            <div th:each="post : ${Post}">
-                <form th:action="@{/displayPost}" method="get">
-                    <table class="interestTable">
-                        <thead>
-                        <tr>
-                            <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="p:${Post}">
-                            <td th:text="${p.getPostID()}"></td>
-                            <td th:text="${p.getTitle()}" ><a th:href="@{/PostDetail(id=${p.getPostID()})}"></a></td>
-                            <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
-                            <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
-                        </tr>
+            <!--Table-->
+            <table class="table-responsive">
+            </table>
+            <table class="table table-hover table-forum text-center">
+                <!--Table head-->
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th class="text-left">Topic</th>
+                    <th>Author</th>
+                    <th>Comments</th>
+                </tr>
+                </thead>
+                <!--Table head-->
+                <!--Table body-->
+                <tbody>
+                <tr th:each="p:${Post}">
+                    <td scope="row" class="text-nowrap" th:text="${p.getPostID()}"></td>
+                    <td class="text-start" >
+                        <a href="postDetail.html" th:href="@{/PostDetail(id=${p.getPostID()})}" class="font-weight-bold blue-text" th:text="${p.getTitle()}">
+                        </a>
+                        <div class="my-2">
+                            <span class="badge bg-secondary mx-1" th:text="${p.getMeetingType()}"></span><span
+                                class="badge bg-primary mx-1" th:text="${p.getOpenType()}"></span>
+                            <span th:text="${p.getCreatedData()}"></span>
+                            <div></div>
+                        </div>
+                    </td>
+                    <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
+                    <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
+                    <td>
+                        <a href="#" class="text-dark">
+                            <span>0</span>
+                            <i class="fas fa-comments ml-1"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+                <!--Table body-->
+            </table>
+            <!-- Table -->
 
-                        </tbody>
-                    </table>
-
-                    <!--                <button type="submit" class="post-button">-->
-                    <!--                    <div class="text-box">-->
-                    <!--                        <span th:text="${post.getPostID()}"></span>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="text-box">-->
-                    <!--                        <span th:text="${post.getTitle()}"></span>-->
-                    <!--                    </div>-->
-                    <!--&lt;!&ndash;                    <div class="text-box">&ndash;&gt;-->
-                    <!--&lt;!&ndash;                        <span th:text="${post.getStudent().getFirstName()}"></span>&ndash;&gt;-->
-                    <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-                    <!--                    <div class="student-info">-->
-                    <!--                        <p th:text="${post.getStudent().getFirstName()}"></p>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="timetable" th:text="${post.getStudent().getLastName()}"></div>-->
-                    <!--                </button>-->
-                </form>
+            <!--Bottom Table UI-->
+            <div class="d-flex justify-content-center">
+                <!--Pagination -->
+                <nav class="my-2 pt-2">
+                    <ul class="pagination pagination-circle pg-info mb-0">
+                        <!--First-->
+                        <li class="page-item clearfix d-none d-md-block">
+                            <a href="#" class="page-link waves-effect">
+                                First </a>
+                        </li>
+                        <!--Arrow left-->
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                                <span class="sr-only">
+                Previous </span>
+                            </a>
+                        </li>
+                        <!--Numbers-->
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect">11</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect">12</a>
+                        </li>
+                        <li class="page-item active">
+                            <a href="#" class="page-link waves-effect">13</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect">14</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect">15</a>
+                        </li>
+                        <!--Arrow right-->
+                        <li class="page-item">
+                            <a href="#" class="page-link waves-effect" aria-label="Next">
+                                <span aria-hidden="true">»</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <!--First-->
+                        <li class="page-item clearfix d-none d-md-block">
+                            <a href="#" class="page-link waves-effect">
+                                Last </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!--/Pagination -->
             </div>
-            <!-- Display Filtered Posts -->
-            <div th:if="${filteredPosts != null}">
-                <div th:each="post : ${filteredPosts}">
-                    <form th:action="@{/displayPost}" method="get">
-                        <table class="interestTable">
-                            <thead>
-                            <tr>
-                                <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="p:${Post}">
-                                <td th:text="${p.getPostID()}"></td>
-                                <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>
-                                <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
-                                <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-
-            <a class="btn btn-success" th:href="@{createpost}"> Create </a>
-
+            <!--Bottom Table UI-->
         </div>
     </div>
+<!--    <div class="container mt-2 pre-scrollable">-->
+<!--        <div class="card-header"> </div>-->
+<!--        <div class="card-body">-->
+<!--            &lt;!&ndash;            <button type="submit" class="post-button">display</button>&ndash;&gt;-->
+<!--            <div th:each="post : ${Post}">-->
+<!--                <form th:action="@{/displayPost}" method="get">-->
+<!--                    <table class="interestTable">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="p:${Post}">-->
+<!--                            <td th:text="${p.getPostID()}"></td>-->
+<!--                            <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>-->
+<!--                            <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>-->
+<!--                            <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>-->
+<!--                        </tr>-->
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+<!--                    &lt;!&ndash;                <button type="submit" class="post-button">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <div class="text-box">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <span th:text="${post.getPostID()}"></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <div class="text-box">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <span th:text="${post.getTitle()}"></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;&lt;!&ndash;                    <div class="text-box">&ndash;&gt;&ndash;&gt;-->
+<!--                    &lt;!&ndash;&lt;!&ndash;                        <span th:text="${post.getStudent().getFirstName()}"></span>&ndash;&gt;&ndash;&gt;-->
+<!--                    &lt;!&ndash;&lt;!&ndash;                    </div>&ndash;&gt;&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <div class="student-info">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <p th:text="${post.getStudent().getFirstName()}"></p>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <div class="timetable" th:text="${post.getStudent().getLastName()}"></div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                </button>&ndash;&gt;-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Display Filtered Posts &ndash;&gt;-->
+<!--            <div th:if="${filteredPosts != null}">-->
+<!--                <div th:each="post : ${filteredPosts}">-->
+<!--                    <form th:action="@{/displayPost}" method="get">-->
+<!--                        <table class="interestTable">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>Post ID</th><th>Title</th><th>Student Name</th><th></th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="p:${Post}">-->
+<!--                                <td th:text="${p.getPostID()}"></td>-->
+<!--                                <td th:text="${p.getTitle()}"><a href="displayPost.html"></a></td>-->
+<!--                                <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>-->
+<!--                                <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>-->
+<!--                            </tr>-->
+
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <a class="btn btn-success" th:href="@{createpost}"> Create </a>-->
+
+<!--        </div>-->
+<!--    </div>-->
 </section>
 </body>
 </html>
