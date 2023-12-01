@@ -13,6 +13,25 @@
     <script type="text/javascript" src="/RequestValidationCheck.js"></script>
     <link rel="stylesheet" href="/content.css">
     <link rel="stylesheet" href="/button.css">
+
+    <style>
+        .comment-block{
+            width: 98%;
+            margin: auto;
+        }
+
+
+        textarea{
+            border-radius: 8px;
+            background-color: #eff0f0;
+        }
+        .cm_input{
+            text-align: center;
+        }
+        span{
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -77,51 +96,86 @@
                 <a th:if="${session.studentId} == ${detail.student.getSID()}" th:href="@{/board}" class="btns btn_bdr3 btn_mid">Back</a>
             </p>
 
-            <!-- Comment List -->
-            <div class="cm_write" >
-                <tr th:each="comment: ${commentList}">
-                    <div class="cm_input">
-                        <p th:if="${session.studentId} != ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%;" rows="3" readonly = readonly></textarea></p>
-                        <p th:if="${session.studentId} == ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%; background-color:#FAED7D " rows="3"></textarea></p>
-                        <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
-                            <span><a th:href="@{/PostDetail/AcceptComment(id=${comment.commentID})}" class="btns">Accept</a></span>
-                        <p class="btn_set">
-                        <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
-                        <div class="cm_input" th:if="${session.studentId} == ${comment.getStudent().getSID()}">
-                            <span th:if="${#strings.equals(comment.status, 'APPLIED')}"><button type="submit" class="btns" disabled = disabled>APPLIED</button><i>Your submission is waiting for approval</i></span>
-                            <span th:if="${#strings.equals(comment.status, 'ACCEPTED')}"><button type="submit" class="btns" disabled = disabled>ACCEPTED</button><i>Your submission has been accepted.</i></span>
-                            <span th:if="${#strings.equals(comment.status,'DECLINED')}"><button type="submit" class="btns" style="background-color:#FF5E00" disabled = disabled>DECLINED</button><i>Your submission has been declined.</i> </span>
+
+
+            <section class="comment-section" style="background-color: #d7d9da">
+
+                <div class="container my-5 py-5">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12 col-lg-10">
+                            <div class="card text-dark">
+
+
+
+                                <div class="card-body p-4">
+                                    <h4 class="mb-0">Comments</h4>
+
+                                    <div class="cm_write" >
+                                        <tr th:each="comment: ${commentList}">
+                                            <div class="cm_input">
+
+                                                <div class="comment-block">
+                                                    <p th:if="${session.studentId} != ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%;" rows="3" readonly = readonly></textarea></p>
+                                                    <p th:if="${session.studentId} == ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%; " rows="3"></textarea></p>
+                                                    <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
+                                                        <span><a th:href="@{/PostDetail/AcceptComment(id=${comment.commentID})}" class="btns">Accept</a></span>
+                                                </div>
+                                                    <p class="btn_set">
+                                                    <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
+
+
+                                                <div class="cm_input" th:if="${session.studentId} == ${comment.getStudent().getSID()}">
+                                                <span th:if="${#strings.equals(comment.status, 'APPLIED')}"><button type="submit" class="btns" disabled = disabled>APPLIED</button><i>Your submission is waiting for approval</i></span>
+                                                <span th:if="${#strings.equals(comment.status, 'ACCEPTED')}"><button type="submit" class="btns" disabled = disabled>ACCEPTED</button><i>Your submission has been accepted.</i></span>
+                                                <span th:if="${#strings.equals(comment.status,'DECLINED')}"><button type="submit" class="btns" style="background-color:#FF5E00" disabled = disabled>DECLINED</button><i>Your submission has been declined.</i> </span>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </div>
+
+
+                                    <form method="post" th:action="@{PostDetail/SaveComment}" th:object="${newComment}">
+                                        <div class="cm_write">
+                                            <fieldset>
+                                                <legend>Add Comment</legend>
+                                                <div class="cm_input">
+                                                    <p><textarea class = "form-control" id="content" name="content" onkeyup="countingLength(this);" th:field="*{detail}" th:text="${newComment.detail}" style="width:100%;" rows="3" placeholder="Please add comment"></textarea></p>
+                                                    <span><button type="submit" class="btns">Apply</button> <i id="counter">0/300(Character)</i></span>
+                                                </div>
+                                                <input class = "form-control" type="hidden" th:field="*{post.postID}" th:value="${newComment.getPost().postID}"/>
+                                            </fieldset>
+                                        </div>
+                                    </form>
+                                    </div>
+
+
+                            </div>
+
+
+
                         </div>
-                    </div>
-                </tr>
-            </div>
+                        </div>
 
 
-        <form method="post" th:action="@{PostDetail/SaveComment}" th:object="${newComment}">
-            <div class="cm_write">
-                <fieldset>
-                    <legend>Add Comment</legend>
-                    <div class="cm_input">
-                        <p><textarea class = "form-control" id="content" name="content" onkeyup="countingLength(this);" th:field="*{detail}" th:text="${newComment.detail}" style="width:100%;" rows="3" placeholder="Please add comment"></textarea></p>
-                        <span><button type="submit" class="btns">Apply</button> <i id="counter">0/300(Character)</i></span>
-                    </div>
-                    <input class = "form-control" type="hidden" th:field="*{post.postID}" th:value="${newComment.getPost().postID}"/>
-                </fieldset>
-            </div>
-        </form>
+                </div>
 
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            function countingLength(content) {
-                if (content.value.length > 300) {
-                    alert('Please enter comments of 300 characters or less.');
-                    content.value = content.value.substring(0, 300);
-                    content.focus();
-                }
-                document.getElementById('counter').innerText = content.value.length + '/300';
-            }
-            /*]]>*/
-        </script>
+
+
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    function countingLength(content) {
+                        if (content.value.length > 300) {
+                            alert('Please enter comments of 300 characters or less.');
+                            content.value = content.value.substring(0, 300);
+                            content.focus();
+                        }
+                        document.getElementById('counter').innerText = content.value.length + '/300';
+                    }
+                    /*]]>*/
+                </script>
+            </section><!-- Comment List -->
+
+
 
     </div>
 </div>
