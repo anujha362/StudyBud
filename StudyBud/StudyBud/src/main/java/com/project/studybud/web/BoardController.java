@@ -1,7 +1,10 @@
 package com.project.studybud.web;
 
 import com.project.studybud.entities.Post;
+import com.project.studybud.entities.Student;
+import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
+import com.project.studybud.repositories.StudentRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +24,23 @@ import java.util.List;
 public class BoardController {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     static int num = 0;
 
     public Post getPostById(Long postId) {
+
         return postRepository.findById(postId).orElse(null);
     }
-//    List<String> getDistinctMeetingTypes() {
-//        return postRepository.findDistinctMeetingTypes();
-//    }
 
-    List<String> getDistinctStudentCourses() {
-        return postRepository.findDistinctStudentCourses();
+    List<String> getDistinctStudentCourses(long studentID) {
+
+        return courseRepository.findDistinctCourseNamesByStudentId(studentID);
     }
-    List<String> getDistinctStudentPrograms(){
+    String getDistinctStudentPrograms(){
+
         return postRepository.findDistinctStudentPrograms();
     }
 
@@ -60,15 +67,14 @@ public class BoardController {
     public String filterPosts(
             @RequestParam(name = "meetingType", required = false) String meetingType,
             @RequestParam(name = "openType", required = false) String openType,
-            @RequestParam(name = "studentProgram", required = false) String studentProgram,
             @RequestParam(name = "studentCourse", required = false) String studentCourse,
-            Model model) {
-        List<String> distinctCourseNames = getDistinctStudentCourses();
-        List<String> distinctStudentPrograms = getDistinctStudentPrograms();
+            Model model,long postID) {
+        String studentProgram = getDistinctStudentPrograms();
+        Post posts = getPostById(postID);
+        List<String> distinctCourseNames = getDistinctStudentCourses(posts.getStudent().getSID());
         List<Post> filteredPosts = filterPosts(meetingType,openType,studentProgram,studentCourse);
         model.addAttribute("filteredPosts", filteredPosts);
         model.addAttribute("distinctStudentCourses", distinctCourseNames);
-        model.addAttribute("distinctStudentPrograms", distinctStudentPrograms);
 
         return "board";
     }
