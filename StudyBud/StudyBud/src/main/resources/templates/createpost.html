@@ -29,7 +29,57 @@
 
             <form method="post" th:action="@{/createpost/save}">
 
-                <!-- Title -->
+
+                <div class="container">
+                    <div class="row">
+                    <!-- Open To -->
+                    <div class="form-group col-6">
+                        <label>Open To</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="public" name="openToPublic"
+                                   th:checked="${post.openType}">
+                            <span th:errors="${post.openType}"></span>
+                            <label class="form-check-label" for="public">Public</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="classmate" name="openToClassmate"
+                                   th:checked="${post.openType}">
+                            <span th:errors="${post.openType}"></span>
+                            <label class="form-check-label" for="classmate">Classmate</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="programPeer" name="openToProgramPeer"
+                                   th:checked="${post.openType}">
+                            <span th:errors="${post.openType}"></span>
+                            <label class="form-check-label" for="programPeer">Program Peer</label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group col-6">
+                        <label>Meeting Type</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="virtual" name="meetingVirtual"
+                                   th:checked="${post.meetingType}">
+                            <span th:errors="${post.meetingType}"></span>
+                            <label class="form-check-label" for="public">Zoom</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="inPerson" name="meetingInPerson"
+                                   th:checked="${post.meetingType}">
+                            <span th:errors="${post.meetingType}"></span>
+                            <label class="form-check-label" for="classmate">In person</label>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+
+                <br>
+
+
+                <!-- Title --> 
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" name="title"
@@ -37,6 +87,7 @@
                     <span th:errors="${post.title}"></span>
                 </div>
                 <br>
+
                 <!-- Details -->
                 <div class="form-group">
                     <label for="details">Details</label>
@@ -45,10 +96,12 @@
                     <span th:errors="${post.detail}"></span>
                 </div>
                 <br>
+
                 <!-- Time Selection -->
                 <div class="form-group">
                     <label for="time">Time:</label>
                     <select class="form-control" id="time" name="time"  th:field="*{post.meetingTime}" required>
+
                         <!--                        <option value="08:00 - 09:00">08:00 - 10:00</option>-->
                         <!--                        <option value="09:00 - 10:00">10:00 - 12:00</option>-->
                         <!--                        <option value="09:00 - 10:00">12:00 - 14:00</option>-->
@@ -58,46 +111,6 @@
                     </select>
                 </div>
                 <br>
-                <!-- Open To -->
-                <div class="form-group">
-                    <label>Open To</label>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="public" name="openToPublic"
-                               th:checked="${post.openType}">
-                        <span th:errors="${post.openType}"></span>
-                        <label class="form-check-label" for="public">Public</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="classmate" name="openToClassmate"
-                               th:checked="${post.openType}">
-                        <span th:errors="${post.openType}"></span>
-                        <label class="form-check-label" for="classmate">Classmate</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="programPeer" name="openToProgramPeer"
-                               th:checked="${post.openType}">
-                        <span th:errors="${post.openType}"></span>
-                        <label class="form-check-label" for="programPeer">Program Peer</label>
-                    </div>
-                </div>
-                <br>
-
-                <div class="form-group">
-                    <label>Meeting Type</label>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="virtual" name="meetingVirtual"
-                               th:checked="${post.meetingType}">
-                        <span th:errors="${post.meetingType}"></span>
-                        <label class="form-check-label" for="public">Zoom</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="inPerson" name="meetingInPerson"
-                               th:checked="${post.meetingType}">
-                        <span th:errors="${post.meetingType}"></span>
-                        <label class="form-check-label" for="classmate">In person</label>
-                    </div>
-                </div>
-                <br>
 
                 <!-- Submit Button -->
                 <div class="text-right">
@@ -105,8 +118,6 @@
                 </div>
 
             </form>
-
-
 
         </div>
     </div>
