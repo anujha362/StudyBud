@@ -11,38 +11,43 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .pre-scrollable{ height:500px;
-            overflow-y: scroll;
+            /*overflow-y: scroll;*/
         }
         h1 {
             text-align: center;
         }
 
         body{
-            background-image: linear-gradient(to right, #36669c,#77f07f);
+
+            /*background-color: #f2f2f3;*/
+
         }
 
         table, th, td{
 
-            border: #f2f2f3 solid 2px;
+            /*border: #f2f2f3 solid 2px;*/
             border-collapse: collapse;
 
 
         }
 
         th, td {
-            background-color: #d7d9da;
+            /*background-color: #d7d9da;*/
             text-align: center;
         }
+
     </style>
 </head>
 <body>
 <section layout:fragment="content">
     <h1 id = "profile header">History</h1>
-    <div class="container mt-2 pre-scrollable">
+    <br>
+    <div class="container mt-2">
+        <div class="card">
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <table class="table table-striped" style="width: 90%">
+            <table class="table" style="width: 100%">
                 <thead>
                 <tr>
                     <th scope="col">Student ID</th><th scope="col">Name</th><th scope="col">Title</th><th scope="col">Rating</th>
@@ -53,11 +58,11 @@
                     <td th:text="${p.getStudent().getFirstName()} + ${p.getStudent().getLastName()}"></td>
                     <td th:text="${p.getTitle()}"></td>
                     <td> <div id="rating" class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star text-warning"></span>
+                        <span class="fa fa-star text-warning"></span>
                     </div></td>
                 </tr>
                 </tbody>
@@ -67,6 +72,7 @@
 
 
         </div>
+    </div>
     </div>
 </section>
 </body>
