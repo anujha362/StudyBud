@@ -6,13 +6,14 @@
     <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/button.css">
     <link rel="stylesheet" href="/login.css">
     <link rel="stylesheet" href="/content.css">
-    <link rel="stylesheet" href="/button.css">
+
 
 </head>
 
@@ -21,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-5 text-center">
-                <h1 class="display-4 text-primary">Welcome to StudyBud</h1>
+                <h1 class="display-4 text-primary font-weight-bold">Welcome to StudyBud</h1>
             </div>
         </div>
 <th:block layout:fragment="content">
@@ -36,7 +37,7 @@
         <form method="post" th:action="@{/login}" th:object="${student}">
 
             <div class="form-outline mb-4">
-                <input type="text"  class="form-control form-control-lg" th:field="*{SID}" placeholder="Student ID" autocomplete="off" required/>
+                <input type="text"  class="form-control form-control-lg" th:field="*{SID}"  placeholder="Student ID" autocomplete="off" required/>
             </div>
 
             <div class="form-outline mb-3">

@@ -45,6 +45,8 @@ public class LoginController {
         //session.getAttribute("Email").toString()
 
         Student student = new Student();
+        student.setSID(300357917L);
+        student.setCID(1000L);
         model.addAttribute("student", student);
 
         return "login";

@@ -72,7 +72,7 @@
                             <option th:value="Online">Online</option>
                             <option th:value="Offline">Offline</option>
                         </select>
-
+                      
                         <label for="openType">Open Type:</label>
                         <select id="openType" name="openType">
                             <option th:value="Public">Public</option>
@@ -83,7 +83,7 @@
                         <select id="studentCourse" name="studentCourse">
                             <option th:each="course:${distinctStudentCourses}" th:value="${course}" th:text="${course}"></option>
                         </select>
-
+                      
                         <button type="submit">Filter</button>
                     </form>
 
@@ -117,11 +117,11 @@
                                             <div></div>
                                         </div>
                                     </td>
-                                    <td style="padding:0"  th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
-                                    <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
+                                    <td style="padding:0"  th:class="student-info" th:text="${p.getFirstName()}"></td>
+                                    <td th:class="timetable" th:text="${p.getLastName()}"></td>
                                     <td>
                                         <a href="#" class="text-dark">
-                                            <span>0</span>
+                                            <span th:text="${p.getCmtCount()}"></span>
                                             <i class="fas fa-comments ml-1"></i>
                                         </a>
                                     </td>
@@ -172,12 +172,12 @@
                             <!--Bottom Table UI-->
                         </div>
                     </div>
-
                     <a class="btn btn-success" th:href="@{createpost}"> Create </a>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 </body>
 </html>

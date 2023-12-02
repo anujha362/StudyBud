@@ -7,24 +7,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .pre-scrollable{ height:500px;
-            overflow-y: scroll;
+            /*overflow-y: scroll;*/
         }
         h1 {
             text-align: center;
         }
+
+        body{
+
+            /*background-color: #f2f2f3;*/
+
+        }
+
+        table, th, td{
+
+            /*border: #f2f2f3 solid 2px;*/
+            border-collapse: collapse;
+
+
+        }
+
+        th, td {
+            /*background-color: #d7d9da;*/
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
 <section layout:fragment="content">
     <h1 id = "profile header">History</h1>
-    <div class="container mt-2 pre-scrollable">
+    <br>
+    <div class="container mt-2">
+        <div class="card">
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <table class="table table-striped">
+            <table class="table" style="width: 100%">
                 <thead>
                 <tr>
                     <th scope="col">Student ID</th><th scope="col">Name</th><th scope="col">Title</th><th scope="col">Rating</th>
@@ -35,7 +58,11 @@
                     <td th:text="${p.getStudent().getFirstName()} + ${p.getStudent().getLastName()}"></td>
                     <td th:text="${p.getTitle()}"></td>
                     <td> <div id="rating" class="star-rating">
-
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star checked text-warning"></span>
+                        <span class="fa fa-star text-warning"></span>
+                        <span class="fa fa-star text-warning"></span>
                     </div></td>
                 </tr>
                 </tbody>
@@ -45,6 +72,7 @@
 
 
         </div>
+    </div>
     </div>
 </section>
 </body>
