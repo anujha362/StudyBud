@@ -36,32 +36,26 @@
                     <div class="form-group col-6">
                         <label>Open To</label>
                         <div class="form-check">
-<<<<<<< Updated upstream
+
                             <input type="radio" class="form-check-input" id="public" name="openTo"
                                  th:value="Public" th:field="${post.openType}"  th:checked="${post.openType}">
-=======
-                            <input type="radio" th:field="${post.openType}" th:value="PUBLIC"
-                                   th:checked="${post.openType == 'Public'}">
->>>>>>> Stashed changes
+
 
                             <label class="form-check-label" >Public</label>
                         </div>
                         <div class="form-check">
-<<<<<<< Updated upstream
+
                             <input type="radio" class="form-check-input" id="classmate" name="openTo"
                                    th:value="Classmate" th:field="${post.openType}"  th:checked="${post.openType}">
-=======
-                            <input type="radio" th:field="${post.openType}" th:value="PROGRAM">
->>>>>>> Stashed changes
+
 
                             <label class="form-check-label">Same Program</label>
                         </div>
-<<<<<<< Updated upstream
+
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="programPeer" name="openTo"
                                    th:value="ProgramPeer" th:field="${post.openType}" th:checked="${post.openType}">
-=======
->>>>>>> Stashed changes
+
 
                     </div>
 
@@ -156,17 +150,12 @@
 
                 <!-- Details -->
                 <div class="form-group">
-<<<<<<< Updated upstream
-                    <label for="details">Details</label>
-                    <textarea class="form-control" id="details" name="details" rows="4"
-                              th:field="*{post.detail}" required></textarea>
-                    <span th:errors="*{post.detail}"></span>
-=======
+
                     <label >Details</label>
                     <textarea class="form-control" rows="4"
                               th:field="${post.detail}" th:text="${post.detail}" required></textarea>
                     <span th:errors="${post.detail}"></span>
->>>>>>> Stashed changes
+
                 </div>
                 <br>
 

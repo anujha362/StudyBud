@@ -284,16 +284,20 @@ public class PostController {
                            HttpSession httpSession, HttpServletRequest request) {
 
 
-        if (bindingResult.hasErrors()) {
-            return "editpost";
-        } else {
+            HttpSession session = request.getSession();
+            Long sID = (Long)session.getAttribute("studentId");
+            Long cID = (Long)session.getAttribute("CollegeId");
+
+            StudentID studentID = new StudentID(cID,sID);
+            Student student = studentRepository.findById(studentID).orElse(null);
+
+            postDetail.setStudent(student);
 
             postDetail.setModifiedData(CommonConstants.localDateTime);
             postRepository.save(postDetail);
 
             return "redirect:board";
 
-        }
 
     }
 }

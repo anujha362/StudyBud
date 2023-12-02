@@ -27,12 +27,11 @@
         <div class="card-header"> </div>
         <div class="card-body">
 
-<<<<<<< Updated upstream
             <form method="post" th:action="@{/postedit}" >
                 <input class = "form-control" type="hidden" th:field="${postDetail.postID}" />
                 <input class = "form-control" type="hidden" th:field="${postDetail.student}" />
 
-<!--                <input class = "form-control" type="hidden" th:field="${postDetail.student.getSID()}" />-->
+                <!--                <input class = "form-control" type="hidden" th:field="${postDetail.student.getSID()}" />-->
 
 
                 <div class="container">
@@ -120,7 +119,7 @@
                             <label>Meeting date</label>
 
                             <input type="date" class="form-date-input" id="meetingDate" name="meetingDate"
-                                  th:value="${#temporals.format(postDetail.meetingDate, 'yyyy-MM-dd')}" required>
+                                   th:value="${#temporals.format(postDetail.meetingDate, 'yyyy-MM-dd')}" required>
                             <span th:errors="*{postDetail.meetingDate}" class="error"></span>
 
                         </div>
@@ -140,9 +139,6 @@
                 </div>
                 <br>
 
-=======
-            <form method="post" th:action="@{editpost}">
->>>>>>> Stashed changes
 
                 <!-- Title -->
                 <div class="form-group">
