@@ -48,9 +48,7 @@
         <div class="card">
         <div class="card-header"> </div>
         <div class="card-body">
-
             <form method="get" id="regiFrm" >
-
             <table class="table" style="width: 100%">
                 <thead>
                 <tr>
@@ -77,6 +75,23 @@
 
 
 
+<!--                        <form class="mb-3" name="myform" id="myform" method="post">-->
+<!--                            <fieldset>-->
+<!--                                <input type="radio" name="reviewStar" value="5" id="rate1"><label-->
+<!--                                    for="rate1">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="4" id="rate2"><label-->
+<!--                                    for="rate2">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="3" id="rate3"><label-->
+<!--                                    for="rate3">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="2" id="rate4"><label-->
+<!--                                    for="rate4">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="1" id="rate5"><label-->
+<!--                                    for="rate5">★</label>-->
+
+
+<!--                            </fieldset>-->
+<!--                        </form>-->
+
 
                     </div></td>
                 </tr>
@@ -86,17 +101,10 @@
 
             <script th:inline="javascript">
                 function saveRate(rID, pID, rateValue){
-                    if(rID != null){
-                        var urlRid = document.createElement('input');
-                        urlRid.setAttribute('name', 'rID');
-                        urlRid.setAttribute('type', 'hidden');
-                        urlRid.setAttribute('value', rID);
-                    }else{
-                        var urlRid = document.createElement('input');
-                        urlRid.setAttribute('name', 'rID');
-                        urlRid.setAttribute('type', 'hidden');
-                        urlRid.setAttribute('value', 0);
-                    }
+                    var urlRid = document.createElement('input');
+                    urlRid.setAttribute('name', 'rID');
+                    urlRid.setAttribute('type', 'hidden');
+                    urlRid.setAttribute('value', rID);
 
                     var urlPid = document.createElement('input');
                     urlPid.setAttribute('name', 'pID');

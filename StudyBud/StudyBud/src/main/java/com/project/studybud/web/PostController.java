@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -155,6 +157,14 @@ public class PostController {
         return "redirect:/PostDetail";
     }
 
+    @GetMapping(path = "/postDelete")
+    public String postDelete(Model model, HttpServletRequest request, @RequestParam final long id, RedirectAttributes re ) {
+
+        postRepository.deleteById(id);
+
+        return "redirect:/board";
+    }
+
     @GetMapping(path = {"/PostDetail/AcceptComment"})
     public String acceptComment(Model model, HttpServletRequest request, @RequestParam final long id, RedirectAttributes re ) {
 
@@ -242,4 +252,48 @@ public class PostController {
         return "dashboard";
     }
 
+
+    @GetMapping(path = "/editpost")
+    public String EditPost(@RequestParam final long id, Model model, HttpSession httpSession, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        AlertMessage alertMessage = null;
+
+        Post postDetail = new Post();
+        postDetail = postRepository.findById(id).orElse(null);
+        if(postDetail == null) {
+            //Show alert message and move to List page
+            alertMessage = new AlertMessage();
+            alertMessage.setMessage("Post does not exist");
+            alertMessage.setRedirectUrl(CommonConstants.RedirectUrls.BOARD);
+            alertMessage.setHttpMethod(CommonConstants.HttpMetthod.GET);
+
+            return alertController.messageRedirect(alertMessage, model);
+
+        } else {
+            model.addAttribute("postDetail", postDetail);
+
+        }
+
+        return "editpost";
+    }
+
+
+    @PostMapping (path = "/postedit")
+    public String postEdit(Model model, Post postDetail, BindingResult bindingResult, ModelMap modelMap,
+                           HttpSession httpSession, HttpServletRequest request) {
+
+
+        if (bindingResult.hasErrors()) {
+            return "editpost";
+        } else {
+
+            postDetail.setModifiedData(CommonConstants.localDateTime);
+            postRepository.save(postDetail);
+
+            return "redirect:board";
+
+        }
+
+    }
 }
