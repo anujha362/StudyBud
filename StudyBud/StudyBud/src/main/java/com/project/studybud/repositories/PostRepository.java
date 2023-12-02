@@ -25,7 +25,8 @@ public interface PostRepository extends JpaRepository<Post,Long> {
             "JOIN Student s ON p.student.cID = s.cID AND p.student.sID = s.sID  \n" +
             "JOIN Student r ON r.cID = :cId AND r.sID  = :sId \n" +
             "LEFT JOIN Comment c ON p.postID = c.post.postID \n" +
-            //" WHERE p.openType = 'PUBLIC' OR (p.openType = 'PROGRAM' AND s.deptName = r.deptName)   \n" +
+            " WHERE (p.openType = 'Public' OR (p.openType = 'ProgramPeer' AND s.deptName = r.deptName)) " +
+            "   AND ifnull(p.status,'') <> 'review'  \n" +
             " group by p.postID, p.title, p.openType, p.meetingType, p.createdData, s.firstName, s.lastName " )
     List<PostTitle> findAllByFilterDefaultWithJPQL(Long cId, Long sId);
 

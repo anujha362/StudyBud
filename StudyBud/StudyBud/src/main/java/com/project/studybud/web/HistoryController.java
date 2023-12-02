@@ -66,8 +66,12 @@ public class HistoryController {
         Review review = reviewRepository.findById(rid).orElse(null);
         if(review == null){
 
-            Post post = new Post();
-            post.setPostID(pid);
+//            Post post = new Post();
+//            post.setPostID(pid);
+            Post post = PostRepository.findById(pid).orElse(null);
+            post.setStatus("review");
+            PostRepository.save(post);
+
             Student student = new Student();
             student.setCID(cID);
             student.setSID(sID);
