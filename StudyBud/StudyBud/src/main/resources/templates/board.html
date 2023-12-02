@@ -97,7 +97,8 @@
         </select>
 
         <label for="studentCourse">Student's Course:</label>
-        <select id="studentCourse" name="studentCourse">
+        <select id="studentCourse" th:field="*{distinctStudentCourses}" name="studentCourse">
+            <option value="">ALL</option>
             <option th:each="course:${distinctStudentCourses}" th:value="${course}" th:text="${course}"></option>
         </select>
 
@@ -135,11 +136,11 @@
                             <div></div>
                         </div>
                     </td>
-                    <td th:class="student-info" th:text="${p.getStudent().getFirstName()}"></td>
-                    <td th:class="timetable" th:text="${p.getStudent().getLastName()}"></td>
+                    <td th:class="student-info" th:text="${p.getFirstName()}"></td>
+                    <td th:class="timetable" th:text="${p.getLastName()}"></td>
                     <td>
                         <a href="#" class="text-dark">
-                            <span>0</span>
+                            <span th:text="${p.getCmtCount()}"></span>
                             <i class="fas fa-comments ml-1"></i>
                         </a>
                     </td>

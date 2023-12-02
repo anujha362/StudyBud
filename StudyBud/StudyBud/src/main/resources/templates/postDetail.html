@@ -13,119 +13,185 @@
     <script type="text/javascript" src="/RequestValidationCheck.js"></script>
     <link rel="stylesheet" href="/content.css">
     <link rel="stylesheet" href="/button.css">
+
+    <style>
+        .comment-block{
+            width: 98%;
+            margin: auto;
+        }
+
+        button{
+            height: 20px;
+            width: 30px;
+            background-color: #6171A9;
+            border-radius: 8px;
+        }
+
+        textarea{
+            border-radius: 8px;
+            background-color: #eff0f0;
+        }
+        .cm_input{
+            text-align: center;
+        }
+        span{
+            margin: 10px;
+        }
+    </style>
 </head>
-<body>
-<th:block layout:fragment="content">
-    <h1 id = "profile header">Post Detail</h1>
-    <div class="container mt-2">
-        <div class="card-header"> </div>
-        <div class="card-body">
-            <table class="tb tb_row">
-                <colgroup>
-                    <col style="width:10%;" /><col style="width:23%;" /><col style="width:10%;" /><col style="width:23%;" />
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <th scope="row">Title</th>
-                        <td colspan="3" th:text="${detail.title}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Class ID</th>
-                        <td th:text="${detail.student.getCID()}"></td>
+<body style=" background-image: linear-gradient(to right, #36669c,#77f07f)">
 
-                        <th scope="row">Student ID</th>
-                        <td th:text="${detail.student.getSID()}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Open Type</th>
-                        <td th:text="${detail.openType}"></td>
+<section layout:fragment="content">
+    <div class="container py-5" >
+        <div class="card">
+            <div class="card-body">
+                <th:block>
+                    <h1 id = "profile header">Post Detail</h1>
+                    <div class="container mt-2">
+                        <div class="card-header"> </div>
+                        <div class="card-body">
+                            <table class="tb tb_row">
+                                <colgroup>
+                                    <col style="width:10%;" /><col style="width:23%;" /><col style="width:10%;" /><col style="width:23%;" />
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Title</th>
+                                        <td colspan="3" th:text="${detail.title}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Class ID</th>
+                                        <td th:text="${detail.student.getCID()}"></td>
 
-                        <th scope="row">Meeting Type</th>
-                        <td th:text="${detail.meetingType}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Participants</th>
-                        <td th:text="${detail.headcount}"></td>
+                                        <th scope="row">Student ID</th>
+                                        <td th:text="${detail.student.getSID()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Open Type</th>
+                                        <td th:text="${detail.openType}"></td>
 
-                        <th scope="row">Meeting Hour</th>
-                        <td th:text="${detail.hours}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Meeting Date</th>
-                        <td th:text="${#temporals.format( detail.meetingDate, 'yyyy-MM-dd' )}"></td>
+                                        <th scope="row">Meeting Type</th>
+                                        <td th:text="${detail.meetingType}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Participants</th>
+                                        <td th:text="${detail.headcount}"></td>
 
-                        <th scope="row">Meeting Time</th>
-                        <td th:text="${#temporals.format( detail.meetingTime, 'HH:mm' )}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Created</th>
-                        <td th:text="${#temporals.format( detail.createdData, 'yyyy-MM-dd HH:mm:ss' )}"></td>
+                                        <th scope="row">Meeting Hour</th>
+                                        <td th:text="${detail.hours}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Meeting Date</th>
+                                        <td th:text="${#temporals.format( detail.meetingDate, 'yyyy-MM-dd' )}"></td>
 
-                        <th scope="row">Updated</th>
-                        <td th:text="${#temporals.format( detail.modifiedData, 'yyyy-MM-dd HH:mm:ss' )}"></td>
-                    </tr>
-                    <tr>
-                        <th>Content</th>
-                        <td colspan="3"><textarea style="width:100%;" rows="10" th:text="${detail.detail}" readonly="readonly"></textarea></td>
-                    </tr>
-                </tbody>
-            </table>
+                                        <th scope="row">Meeting Time</th>
+                                        <td th:text="${#temporals.format( detail.meetingTime, 'HH:mm' )}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Created</th>
+                                        <td th:text="${#temporals.format( detail.createdData, 'yyyy-MM-dd HH:mm:ss' )}"></td>
 
-            <p class="btn_set">
-                <a th:if="${session.studentId} == ${detail.student.getSID()}" th:href="@{/postEdit( id=${detail.postID})}" class="btns btn_bdr4 btn_mid">Edit</a>
-                <a th:if="${session.studentId} == ${detail.student.getSID()} and ${detail.status} != 'Confirmed'" th:href="@{/postDelete( id=${detail.postID} )}" class="btns btn_bdr4 btn_mid">Delete</a>
-                <a th:if="${session.studentId} == ${detail.student.getSID()}" th:href="@{/postList}" class="btns btn_bdr3 btn_mid">Back</a>
-            </p>
+                                        <th scope="row">Updated</th>
+                                        <td th:text="${#temporals.format( detail.modifiedData, 'yyyy-MM-dd HH:mm:ss' )}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Content</th>
+                                        <td colspan="3"><textarea style="width:100%;" rows="10" th:text="${detail.detail}" readonly="readonly"></textarea></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-            <!-- Comment List -->
-            <div class="cm_write" >
-                <tr th:each="comment: ${commentList}">
-                    <div class="cm_input">
-                        <p th:if="${session.studentId} != ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%;" rows="3" readonly = readonly></textarea></p>
-                        <p th:if="${session.studentId} == ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%; background-color:#FAED7D " rows="3"></textarea></p>
-                        <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
-                            <span><a th:href="@{/PostDetail/AcceptComment(id=${comment.commentID})}" class="btns">Accept</a></span>
-                        <p class="btn_set">
-                        <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
-                        <div class="cm_input" th:if="${session.studentId} == ${comment.getStudent().getSID()}">
-                            <span th:if="${#strings.equals(comment.status, 'APPLIED')}"><button type="submit" class="btns" disabled = disabled>APPLIED</button><i>Your submission is waiting for approval</i></span>
-                            <span th:if="${#strings.equals(comment.status, 'ACCEPTED')}"><button type="submit" class="btns" disabled = disabled>ACCEPTED</button><i>Your submission has been accepted.</i></span>
-                            <span th:if="${#strings.equals(comment.status,'DECLINED')}"><button type="submit" class="btns" style="background-color:#FF5E00" disabled = disabled>DECLINED</button><i>Your submission has been declined.</i> </span>
-                        </div>
+                            <p class="btn_set">
+                                <a th:if="${session.studentId} == ${detail.student.getSID()}" th:href="@{/editpost( id=${detail.postID})}" class="btns btn_bdr4 btn_mid">Edit</a>
+                                <a th:if="${session.studentId} == ${detail.student.getSID()} and ${detail.status} != 'Confirmed'" th:href="@{/postDelete( id=${detail.postID} )}" class="btns btn_bdr4 btn_mid">Delete</a>
+                                <a th:if="${session.studentId} == ${detail.student.getSID()}" th:href="@{/board}" class="btns btn_bdr3 btn_mid">Back</a>
+                            </p>
+
+
+
+                            <section class="comment-section" style="background-color: #41a0ae")>
+
+                                <div class="container my-5 py-5">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 col-lg-10">
+                                            <div class="card text-dark">
+
+
+
+                                                <div class="card-body p-4">
+                                                    <h4 class="mb-0">Comments</h4>
+
+                                                    <div class="cm_write" >
+                                                        <tr th:each="comment: ${commentList}">
+                                                            <div class="cm_input">
+
+                                                                <div class="comment-block">
+                                                                    <p th:if="${session.studentId} != ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%;" rows="3" readonly = readonly></textarea></p>
+                                                                    <p th:if="${session.studentId} == ${comment.getStudent().getSID()}"><textarea th:text="${comment.detail}" style="width:100%; " rows="3"></textarea></p>
+                                                                    <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
+                                                                        <span><a th:href="@{/PostDetail/AcceptComment(id=${comment.commentID})}" class="btns">Accept</a></span>
+                                                                </div>
+                                                                    <p class="btn_set">
+                                                                    <p th:if="${session.studentId} == ${detail.student.getSID()}" class="btn_set">
+
+
+                                                                <div class="cm_input" th:if="${session.studentId} == ${comment.getStudent().getSID()}">
+                                                                <span th:if="${#strings.equals(comment.status, 'APPLIED')}"><button type="submit" class="btns" disabled = disabled>APPLIED</button><i>Your submission is waiting for approval</i></span>
+                                                                <span th:if="${#strings.equals(comment.status, 'ACCEPTED')}"><button type="submit" class="btns" disabled = disabled>ACCEPTED</button><i>Your submission has been accepted.</i></span>
+                                                                <span th:if="${#strings.equals(comment.status,'DECLINED')}"><button type="submit" class="btns" style="background-color:#FF5E00" disabled = disabled>DECLINED</button><i>Your submission has been declined.</i> </span>
+                                                                </div>
+                                                            </div>
+                                                        </tr>
+                                                    </div>
+
+
+                                                    <form method="post" th:action="@{PostDetail/SaveComment}" th:object="${newComment}">
+                                                        <div class="cm_write">
+                                                            <fieldset>
+                                                                <legend>Add Comment</legend>
+                                                                <div class="cm_input">
+                                                                    <p><textarea class = "form-control" id="content" name="content" onkeyup="countingLength(this);" th:field="*{detail}" th:text="${newComment.detail}" style="width:100%;" rows="3" placeholder="Please add comment"></textarea></p>
+                                                                    <span><button type="submit" class="btns">Apply</button> <i id="counter">0/300(Character)</i></span>
+                                                                </div>
+                                                                <input class = "form-control" type="hidden" th:field="*{post.postID}" th:value="${newComment.getPost().postID}"/>
+                                                            </fieldset>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                        </div>
+
+
+                                </div>
+
+
+
+                                <script th:inline="javascript">
+                                    /*<![CDATA[*/
+                                    function countingLength(content) {
+                                        if (content.value.length > 300) {
+                                            alert('Please enter comments of 300 characters or less.');
+                                            content.value = content.value.substring(0, 300);
+                                            content.focus();
+                                        }
+                                        document.getElementById('counter').innerText = content.value.length + '/300';
+                                    }
+                                    /*]]>*/
+                                </script>
+                            </section><!-- Comment List -->
                     </div>
-                </tr>
+                </div>
+                </th:block>
             </div>
-
-
-        <form method="post" th:action="@{PostDetail/SaveComment}" th:object="${newComment}">
-            <div class="cm_write">
-                <fieldset>
-                    <legend>Add Comment</legend>
-                    <div class="cm_input">
-                        <p><textarea class = "form-control" id="content" name="content" onkeyup="countingLength(this);" th:field="*{detail}" th:text="${newComment.detail}" style="width:100%;" rows="3" placeholder="Please add comment"></textarea></p>
-                        <span><button type="submit" class="btns">Apply</button> <i id="counter">0/300(Character)</i></span>
-                    </div>
-                    <input class = "form-control" type="hidden" th:field="*{post.postID}" th:value="${newComment.getPost().postID}"/>
-                </fieldset>
-            </div>
-        </form>
-
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            function countingLength(content) {
-                if (content.value.length > 300) {
-                    alert('Please enter comments of 300 characters or less.');
-                    content.value = content.value.substring(0, 300);
-                    content.focus();
-                }
-                document.getElementById('counter').innerText = content.value.length + '/300';
-            }
-            /*]]>*/
-        </script>
-
+        </div>
     </div>
-</div>
-</th:block>
+</section>
 
 </body>
 </html>
