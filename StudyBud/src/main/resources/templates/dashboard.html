@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="menu">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/dashboard_layout.css">
+    <style>
+        .pre-scrollable{
+            height:500px;
+        <!-- overflow-y: scroll; -->
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+
+<section layout:fragment="content" >
+    <h1 id = "profile header">Dashboard</h1>
+    <div style="margin:20px;">
+        <div class="container">
+            <div class="header">
+                <div class="duration">Last 10 days</div>
+            </div>
+            <div class="feat1">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+                <canvas id="chartContainer"></canvas>
+                <script th:inline="javascript">
+                    const ctx = document.getElementById("chartContainer");
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        data:{
+                            labels: ['Nov 25','Nov 26','Nov 27','Nov 28','Nov 29','Nov 30','Dec 1','Dec 2','Dec 3','Dec 4'],
+                            datasets: [{
+                                label: 'Number of Posting',
+                                data: [72,32,90,102,98,119,83,57,25,130],
+                                borderWidth:1,
+                                backgroundColor: [
+                                    'rgba(54,162,235,0.2)',
+                                    'rgba(255,99,132,0.2)',
+                                    'rgba(255,206,86,0.2)',
+                                    'rgba(255,206,86,0.2)',
+                                    'rgba(255,206,86,0.2)',
+                                    'rgba(255,206,86,0.2)',
+                                    'rgba(255,206,86,0.2)',
+                                    'rgba(54,162,235,0.2)',
+                                    'rgba(255,99,132,0.2)',
+                                    'rgba(255,206,86,0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(54,162,235,1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(255,206,86,1)',
+                                    'rgba(255,206,86,1)',
+                                    'rgba(255,206,86,1)',
+                                    'rgba(255,206,86,1)',
+                                    'rgba(255,206,86,1)',
+                                    'rgba(54,162,235,1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(255,206,86,1)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Daily Generation of Posting'
+                            }
+                        }
+                    });
+
+                </script>
+            </div>
+            <div class="feat2">
+                <canvas id="pieChart"></canvas>
+                <script>
+                    var dataset = {
+                        label: "title",
+                        backgroundColor: ['#28c3d7', '#02bc77',  '#ffe47e',  '#FF6384',  '#A374DB'],
+                        borderColor: '#22252B',
+                        data: [259, 290 , 155,72, 32]
+                    }
+
+                    var labels=['5','4','3','2','1'];
+
+                    var datasets={ datasets:[dataset], labels:labels }
+
+
+                    var config = {
+                        type: 'pie',
+                        data: datasets,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'top',
+                                fontColor: 'black',
+                                align: 'center',
+                                display: true,
+                                fullWidth: true,
+                                labels: {
+                                    fontColor: 'rgb(0, 0, 0)'
+                                }
+                            },
+                            plugins: {
+                                labels: {
+                                    render: 'value',
+                                    fontColor: 'black',
+                                    fontSize: 15,
+                                    precision: 2
+                                }
+
+                            },
+                            title: {
+                                display: true,
+                                text: 'Portion of Rating'
+                            }
+                        }
+                    }
+                    var canvas=document.getElementById('pieChart');
+                    var pieChart = new Chart(canvas,config);
+
+                </script>
+            </div>
+            <div class="feat3"><img src="/user_access_graph.png" alt="user access chart"></div>
+            <div class="feat4">[Feature 4]</div>
+
+        </div>
+    </div>
+
+
+
+</section>
+</body>
+</html>

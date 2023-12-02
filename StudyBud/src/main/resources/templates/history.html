@@ -62,7 +62,6 @@
                     <td th:field="${p.getTitle()}" th:text="${p.getTitle()}"></td>
                     <td> <div id="rating" class="star-rating">
 
-
                         <span id="star1" th:if="${p.getRate() >= 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
                         <span id="star1" th:if="${p.getRate() < 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
                         <span id="star2" th:if="${p.getRate() >= 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],2)"></span>
@@ -76,6 +75,24 @@
 
 
 
+<!--                        <form class="mb-3" name="myform" id="myform" method="post">-->
+<!--                            <fieldset>-->
+<!--                                <input type="radio" name="reviewStar" value="5" id="rate1"><label-->
+<!--                                    for="rate1">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="4" id="rate2"><label-->
+<!--                                    for="rate2">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="3" id="rate3"><label-->
+<!--                                    for="rate3">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="2" id="rate4"><label-->
+<!--                                    for="rate4">★</label>-->
+<!--                                <input type="radio" name="reviewStar" value="1" id="rate5"><label-->
+<!--                                    for="rate5">★</label>-->
+
+
+<!--                            </fieldset>-->
+<!--                        </form>-->
+
+
                     </div></td>
                 </tr>
                 </tbody>
@@ -84,17 +101,10 @@
 
             <script th:inline="javascript">
                 function saveRate(rID, pID, rateValue){
-                    if(rID != null){
-                        var urlRid = document.createElement('input');
-                        urlRid.setAttribute('name', 'rID');
-                        urlRid.setAttribute('type', 'hidden');
-                        urlRid.setAttribute('value', rID);
-                    }else{
-                        var urlRid = document.createElement('input');
-                        urlRid.setAttribute('name', 'rID');
-                        urlRid.setAttribute('type', 'hidden');
-                        urlRid.setAttribute('value', 0);
-                    }
+                    var urlRid = document.createElement('input');
+                    urlRid.setAttribute('name', 'rID');
+                    urlRid.setAttribute('type', 'hidden');
+                    urlRid.setAttribute('value', rID);
 
                     var urlPid = document.createElement('input');
                     urlPid.setAttribute('name', 'pID');
