@@ -48,7 +48,9 @@
         <div class="card">
         <div class="card-header"> </div>
         <div class="card-body">
+
             <form method="get" id="regiFrm" >
+
             <table class="table" style="width: 100%">
                 <thead>
                 <tr>
@@ -62,7 +64,6 @@
                     <td th:field="${p.getTitle()}" th:text="${p.getTitle()}"></td>
                     <td> <div id="rating" class="star-rating">
 
-
                         <span id="star1" th:if="${p.getRate() >= 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
                         <span id="star1" th:if="${p.getRate() < 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
                         <span id="star2" th:if="${p.getRate() >= 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],2)"></span>
@@ -73,6 +74,7 @@
                         <span id="star4" th:if="${p.getRate() < 4}" th:field="${p.rate}" th:value="4" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],4)"></span>
                         <span id="star5" th:if="${p.getRate() >= 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],5)"></span>
                         <span id="star5" th:if="${p.getRate() < 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],5)"></span>
+
 
 
 
