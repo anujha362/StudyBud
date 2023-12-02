@@ -16,13 +16,13 @@ public class StudyBudApplication {
         SpringApplication.run(StudyBudApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner commandLineRunner(StudentRepository studentRepository, CollegeRepository collegeRepository){
-//        return args -> {
-//            College college = new College(1000L, "Douglas College", "","");
-//            collegeRepository.save(college);
-//            studentRepository.save(new Student(1000L, college, 300357917L, "Jaycee", "Kim","",""));
-//
-//        };
-//    }
+    @Bean
+    CommandLineRunner commandLineRunner(StudentRepository studentRepository, CollegeRepository collegeRepository){
+        return args -> {
+            College college = new College(1000L, "Douglas College", "","");
+            collegeRepository.save(college);
+            studentRepository.save(new Student(1000L, college, 300357917L, "Jaycee", "Kim","",""));
+
+        };
+    }
 }

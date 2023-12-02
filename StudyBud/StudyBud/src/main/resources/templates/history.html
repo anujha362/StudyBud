@@ -13,59 +13,66 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .pre-scrollable{ height:500px;
-            overflow-y: scroll;
+            /*overflow-y: scroll;*/
         }
         h1 {
             text-align: center;
         }
 
         body{
-            background-image: linear-gradient(to right, #36669c,#77f07f);
+
+            /*background-color: #f2f2f3;*/
+
         }
 
         table, th, td{
 
-            border: #f2f2f3 solid 2px;
+            /*border: #f2f2f3 solid 2px;*/
             border-collapse: collapse;
 
 
         }
 
         th, td {
-            background-color: #d7d9da;
+            /*background-color: #d7d9da;*/
             text-align: center;
         }
+
     </style>
 </head>
 <body>
 <section layout:fragment="content">
     <h1 id = "profile header">History</h1>
-    <div class="container mt-2 pre-scrollable">
+    <br>
+    <div class="container mt-2">
+        <div class="card">
         <div class="card-header"> </div>
         <div class="card-body">
-
-            <table class="table table-striped" style="width: 90%">
+            <form method="get" id="regiFrm" >
+            <table class="table" style="width: 100%">
                 <thead>
                 <tr>
                     <th scope="col">Post ID</th><th scope="col">Student ID</th><th scope="col">Name</th><th scope="col">Title</th><th scope="col">Rating</th>
                 </tr>
                 </thead>
                 <tbody> <tr th:each="p:${History}">
-                    <td th:text="${p.postID}"></td>
-                    <td th:text="${p.getSID()}"></td>
-                    <td th:text="${p.getFirstName()} + ${p.getLastName()}"></td>
-                    <td th:text="${p.getTitle()}"></td>
+                    <td th:field="${p.postID}" th:text="${p.postID}"></td>
+                    <td th:field="${p.getSID()}" th:text="${p.getSID}"></td>
+                    <td th:field="${p.getFirstName()} + ${p.getLastName()}" th:text="${p.getFirstName()} + ${p.getLastName()}"></td>
+                    <td th:field="${p.getTitle()}" th:text="${p.getTitle()}"></td>
                     <td> <div id="rating" class="star-rating">
-                        <span id="star1" th:if="${p.getRate() >= 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" style="color: yellow" ></span>
-                        <span id="star1" th:if="${p.getRate() < 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" ></span>
-                        <span id="star2" th:if="${p.getRate() >= 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" style="color: yellow" ></span>
-                        <span id="star2" th:if="${p.getRate() < 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" ></span>
-                        <span id="star3" th:if="${p.getRate() >= 3}" th:field="${p.rate}" th:value="3" class="fa fa-star" style="color: yellow" ></span>
-                        <span id="star3" th:if="${p.getRate() < 3}" th:field="${p.rate}" th:value="3" class="fa fa-star" ></span>
-                        <span id="star4" th:if="${p.getRate() >= 4}" th:field="${p.rate}" th:value="4" class="fa fa-star" style="color: yellow" ></span>
-                        <span id="star4" th:if="${p.getRate() < 4}" th:field="${p.rate}" th:value="4" class="fa fa-star" ></span>
-                        <span id="star5" th:if="${p.getRate() >= 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" style="color: yellow" ></span>
-                        <span id="star5" th:if="${p.getRate() < 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" ></span>
+
+                        <span id="star1" th:if="${p.getRate() >= 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
+                        <span id="star1" th:if="${p.getRate() < 1}" th:field="${p.rate}" th:value="1" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],1)"></span>
+                        <span id="star2" th:if="${p.getRate() >= 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],2)"></span>
+                        <span id="star2" th:if="${p.getRate() < 2}" th:field="${p.rate}" th:value="2" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],2)"></span>
+                        <span id="star3" th:if="${p.getRate() >= 3}" th:field="${p.rate}" th:value="3" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],3)"></span>
+                        <span id="star3" th:if="${p.getRate() < 3}" th:field="${p.rate}" th:value="3" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],3)"></span>
+                        <span id="star4" th:if="${p.getRate() >= 4}" th:field="${p.rate}" th:value="4" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],4)"></span>
+                        <span id="star4" th:if="${p.getRate() < 4}" th:field="${p.rate}" th:value="4" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],4)"></span>
+                        <span id="star5" th:if="${p.getRate() >= 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" style="color: yellow" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],5)"></span>
+                        <span id="star5" th:if="${p.getRate() < 5}" th:field="${p.rate}" th:value="5" class="fa fa-star" th:onclick="saveRate([[${p.reviewID}]],[[${p.postID}]],5)"></span>
+
 
 
 <!--                        <form class="mb-3" name="myform" id="myform" method="post">-->
@@ -85,15 +92,45 @@
 <!--                            </fieldset>-->
 <!--                        </form>-->
 
+
                     </div></td>
                 </tr>
                 </tbody>
             </table>
+            </form>
+
+            <script th:inline="javascript">
+                function saveRate(rID, pID, rateValue){
+                    var urlRid = document.createElement('input');
+                    urlRid.setAttribute('name', 'rID');
+                    urlRid.setAttribute('type', 'hidden');
+                    urlRid.setAttribute('value', rID);
+
+                    var urlPid = document.createElement('input');
+                    urlPid.setAttribute('name', 'pID');
+                    urlPid.setAttribute('type', 'hidden');
+                    urlPid.setAttribute('value', pID);
+
+                    var urlRate = document.createElement('input');
+                    urlRate.setAttribute('name', 'rateValue');
+                    urlRate.setAttribute('type', 'hidden');
+                    urlRate.setAttribute('value', rateValue);
 
 
+                    var regiFrm = document.getElementById('regiFrm');
+                    regiFrm.appendChild(urlRid);
+                    regiFrm.appendChild(urlPid);
+                    regiFrm.appendChild(urlRate);
+
+                    $("#regiFrm").attr( 'action', '/saveRate');
+                    $("#regiFrm").submit();
+
+                }
+            </script>
 
 
         </div>
+    </div>
     </div>
 </section>
 </body>
