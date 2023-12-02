@@ -41,6 +41,7 @@ public class CommonConstants {
 
     public class RedirectUrls {
         public static final String POSTDETAIL = "/PostDetail";
+        public static final String BOARD = "/board";
         public static final String INDEX = "/index";
         public static final String LOGIN = "/login";
     }

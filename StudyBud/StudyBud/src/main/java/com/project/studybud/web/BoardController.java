@@ -1,9 +1,11 @@
 package com.project.studybud.web;
 
 import com.project.studybud.common.CommonConstants;
+import com.project.studybud.entities.Comment;
 import com.project.studybud.entities.Post;
 import com.project.studybud.entities.Student;
 import com.project.studybud.entities.StudentID;
+import com.project.studybud.models.AlertMessage;
 import com.project.studybud.models.PostTitle;
 import com.project.studybud.repositories.CourseRepository;
 import com.project.studybud.repositories.PostRepository;
@@ -19,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,6 +33,9 @@ public class BoardController {
     private CourseRepository courseRepository;
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    AlertController alertController;
     static int num = 0;
 
     public Post getPostById(Long postId) {
@@ -132,18 +138,6 @@ public class BoardController {
 
 
 
-    @GetMapping(path = "/editpost/{id}")
-    public String EditPost(@PathVariable("id") Long id,
-                           Model model, HttpSession httpSession) {
-
-        httpSession.setAttribute("info", 0);
-
-        Post post = postRepository.findById(id).orElse(null);
-        if(post == null) throw new RuntimeException("Post does not exist");
-        model.addAttribute("post", post);
-
-        return "editpost";
-    }
 
 
     @GetMapping(path = "/profile")

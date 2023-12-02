@@ -36,19 +36,19 @@
                     <div class="form-group col-6">
                         <label>Open To</label>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="public" name="openTo"
+                            <input type="radio" class="form-check-input" id="public" name="openTo"
                                  th:value="Public" th:field="${post.openType}"  th:checked="${post.openType}">
 
                             <label class="form-check-label" for="public">Public</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="classmate" name="openTo"
+                            <input type="radio" class="form-check-input" id="classmate" name="openTo"
                                    th:value="Classmate" th:field="${post.openType}"  th:checked="${post.openType}">
 
                             <label class="form-check-label" for="classmate">Classmate</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="programPeer" name="openTo"
+                            <input type="radio" class="form-check-input" id="programPeer" name="openTo"
                                    th:value="ProgramPeer" th:field="${post.openType}" th:checked="${post.openType}">
 
                             <label class="form-check-label" for="programPeer">Program Peer</label>
@@ -60,13 +60,13 @@
                     <div class="form-group col-6">
                         <label>Meeting Type</label>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="virtual" name="meetingType"
+                            <input type="radio" class="form-check-input" id="virtual" name="meetingType"
                                     th:field="${post.meetingType}" th:value="Zoom" th:checked="${post.meetingType}">
                             <span th:errors="*{post.meetingType}"></span>
                             <label class="form-check-label" for="public">Zoom</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="inPerson" name="meetingType"
+                            <input type="radio" class="form-check-input" id="inPerson" name="meetingType"
                                    th:field="${post.meetingType}" th:value="In-person"  th:checked="${post.meetingType}">
                             <span th:errors="${post.meetingType}"></span>
                             <label class="form-check-label" for="classmate">In person</label>

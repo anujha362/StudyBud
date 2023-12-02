@@ -4,7 +4,7 @@
       layout:decorate="menu">
 <head>
     <meta charset="UTF-8" >
-    <title>Create Post</title>
+    <title>Edit Post</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384- KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384- ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384- JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -22,12 +22,16 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <h1 id = "profile header">Create Post</h1>
+    <h1 id = "profile header">Edit Post</h1>
     <div class="container mt-2 pre-scrollable">
         <div class="card-header"> </div>
         <div class="card-body">
 
-            <form method="post" th:action="@{/postsave}">
+            <form method="post" th:action="@{/postedit}" >
+                <input class = "form-control" type="hidden" th:field="${postDetail.postID}" />
+                <input class = "form-control" type="hidden" th:field="${postDetail.student}" />
+
+<!--                <input class = "form-control" type="hidden" th:field="${postDetail.student.getSID()}" />-->
 
 
                 <div class="container">
@@ -36,20 +40,20 @@
                         <div class="form-group col-6">
                             <label>Open To</label>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="public" name="openTo"
-                                       th:value="Public" th:field="${post.openType}"  th:checked="${post.openType}">
+                                <input type="radio" class="form-check-input" id="public" name="openTo"
+                                       th:value="Public" th:field="${postDetail.openType}"  th:checked="${postDetail.openType}">
 
                                 <label class="form-check-label" for="public">Public</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="classmate" name="openTo"
-                                       th:value="Classmate" th:field="${post.openType}"  th:checked="${post.openType}">
+                                <input type="radio" class="form-check-input" id="classmate" name="openTo"
+                                       th:value="Classmate" th:field="${postDetail.openType}"  th:checked="${postDetail.openType}">
 
                                 <label class="form-check-label" for="classmate">Classmate</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="programPeer" name="openTo"
-                                       th:value="ProgramPeer" th:field="${post.openType}" th:checked="${post.openType}">
+                                <input type="radio" class="form-check-input" id="programPeer" name="openTo"
+                                       th:value="ProgramPeer" th:field="${postDetail.openType}" th:checked="${postDetail.openType}">
 
                                 <label class="form-check-label" for="programPeer">Program Peer</label>
                             </div>
@@ -60,15 +64,15 @@
                         <div class="form-group col-6">
                             <label>Meeting Type</label>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="virtual" name="meetingType"
-                                       th:field="${post.meetingType}" th:value="Zoom" th:checked="${post.meetingType}">
-                                <span th:errors="*{post.meetingType}"></span>
+                                <input type="radio" class="form-check-input" id="virtual" name="meetingType"
+                                       th:field="${postDetail.meetingType}" th:value="Zoom" th:checked="${postDetail.meetingType}">
+                                <span th:errors="*{postDetail.meetingType}"></span>
                                 <label class="form-check-label" for="public">Zoom</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="inPerson" name="meetingType"
-                                       th:field="${post.meetingType}" th:value="In-person"  th:checked="${post.meetingType}">
-                                <span th:errors="${post.meetingType}"></span>
+                                <input type="radio" class="form-check-input" id="inPerson" name="meetingType"
+                                       th:field="${postDetail.meetingType}" th:value="In-person"  th:checked="${postDetail.meetingType}">
+                                <span th:errors="${postDetail.meetingType}"></span>
                                 <label class="form-check-label" for="classmate">In person</label>
                             </div>
                         </div>
@@ -85,8 +89,8 @@
                             <label>How many buddy you want?</label>
 
                             <input type="number" class="form-num-input" id="headCount" name="headCount"
-                                   th:field="*{post.headcount}" min="1" max="10">
-                            <span th:errors="*{post.headcount}" class="error"></span>
+                                   th:field="*{postDetail.headcount}" min="1" max="10">
+                            <span th:errors="*{postDetail.headcount}" class="error"></span>
 
 
                         </div>
@@ -96,9 +100,9 @@
                         <div class="form-group col-6">
                             <label>Hours of studying</label>
 
-                            <input type="number" class="form-num-input" id="studyHours" name="studyHours" th:field="*{post.hours}"
+                            <input type="number" class="form-num-input" id="studyHours" name="studyHours" th:field="*{postDetail.hours}"
                                    min="1" max="4"  required>
-                            <span th:errors="*{post.hours}" class="error"></span>
+                            <span th:errors="*{postDetail.hours}" class="error"></span>
 
                         </div>
 
@@ -115,8 +119,8 @@
                             <label>Meeting date</label>
 
                             <input type="date" class="form-date-input" id="meetingDate" name="meetingDate"
-                                   th:field="*{post.meetingDate}" >
-                            <span th:errors="*{post.meetingDate}" class="error"></span>
+                                  th:value="${#temporals.format(postDetail.meetingDate, 'yyyy-MM-dd')}" required>
+                            <span th:errors="*{postDetail.meetingDate}" class="error"></span>
 
                         </div>
 
@@ -124,9 +128,10 @@
 
                         <div class="form-group col-6">
                             <label>Meeting time</label>
-                            <input type="time" class="form-time-input" id="meetingTime" name="meetingTime" th:field="*{post.meetingTime}"
+                            <input type="time" class="form-time-input" id="meetingTime" name="meetingTime"
+                                   th:value="${#temporals.format(postDetail.meetingTime, 'HH:mm')}"
                                    min="1" max="4"  required>
-                            <span th:errors="*{post.meetingTime}" class="error"></span>
+                            <span th:errors="*{postDetail.meetingTime}" class="error"></span>
 
                         </div>
 
@@ -139,8 +144,8 @@
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" name="title"
-                           th:value="${post.title}" required>
-                    <span th:errors="${post.title}"></span>
+                           th:value="${postDetail.title}" required>
+                    <span th:errors="${postDetail.title}"></span>
                 </div>
                 <br>
 
@@ -148,8 +153,8 @@
                 <div class="form-group">
                     <label for="details">Details</label>
                     <textarea class="form-control" id="details" name="details" rows="4"
-                              th:field="*{post.detail}" required></textarea>
-                    <span th:errors="*{post.detail}"></span>
+                              th:field="*{postDetail.detail}" required></textarea>
+                    <span th:errors="*{postDetail.detail}"></span>
                 </div>
                 <br>
 
