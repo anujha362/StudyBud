@@ -104,7 +104,7 @@
                                     <p class="mb-4"><span class="text-primary font-italic me-1">Interest</span>
                                     </p>
                                     <form method="post" th:action="@{/formInterests}">
-                                        <button  type="submit" class="btn-primary" th:href="@{/formInterests}">Add</button>
+                                        <button  type="submit" class="btn btn-primary" th:href="@{/formInterests}">Add</button>
                                     </form>
                                     <table class="table">
                                         <thead>
@@ -126,10 +126,11 @@
                         </div>
                     </div>
                 </div>
+                <br>
 
-
+                <div class="mt-4">
                 <form method="post" th:action="@{/saveFreeTime}" th:object="${ScheduleList}">
-                    <table class="tb tb_row" id="freetime">
+                    <table class="tb tb_row " id="freetime" style="background-color: #ffffff">
                         <tr>
                             <th>Time</th>
                             <th>Sunday</th>
@@ -188,9 +189,9 @@
                             -->
                         </tr>
                     </table>
-                    <button type="submit" class="btns">Save FreeTime</button>
+                    <button type="submit" class="btn btn-success mt-2">Save FreeTime</button>
                 </form>
-
+                </div>
                 <!-- change -->
                 <script type="text/javascript">
                     var table =document.getElementById('freetime');
