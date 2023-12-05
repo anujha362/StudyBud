@@ -8,18 +8,22 @@ Students entering college from high-school or re-entering an educational environ
 Other study collaboration websites require student to pay for their services, which can be hard on a student’s limited budget. Many such websites are open to everyone, so can give rise to concerns with security and safety. It can take a lot of time for a student to find a suitable study collaboration platform and even when they find a platform that works for them, they then have to spend time searching for someone with similar learning goals to match with.
 
 3. Benefits of Study Bud
+   
 3.1 Benefits to Students
+
 3.1.1 Creates a sense of Community: the platform allows students to interact with peers and develop a supportive community.
 3.1.2 Knowledge Expansion: Provides students with the opportunity to collaborate, share ideas and expand their knowledge.
 3.1.3 Improves Confidence: As students grow their knowledge, their confidence will improve. 
-3.1.3 Builds Discipline: Studying with a partner at an agreed time is a commitment which helps students improve their study discipline. 
-3.1.4 Secure: by using college credentials to authenticate users, Study Bud provides students with the comfort of knowing that they are pairing with other students from their school.
+3.1.4 Builds Discipline: Studying with a partner at an agreed time is a commitment which helps students improve their study discipline. 
+3.1.5 Secure: by using college credentials to authenticate users, Study Bud provides students with the comfort of knowing that they are pairing with other students from their school.
+
 3.2 Benefits to Colleges
+
 3.2.1 Enhances Student Experience: Colleges can benefit from using Study bud because it is an additional service that empowers students to take control of their learning, builds their confidence and develops a sense of community, thus improving the student experience.
 3.2.2 Improves Reputation: A positive student experience can improve the reputation of the college.
 3.2.3 Attracts Potential Students: Potential students consider the types of services, facilities, support and community available at a college. The Study Bud service can attract potential students to colleges that use it.
 
-4. Costs
+5. Costs
 The expenses for building and Implementing the Study Bud platform include:
 •	Personnel costs	 
 •	Hardware costs	
@@ -27,7 +31,7 @@ The expenses for building and Implementing the Study Bud platform include:
 •	Maintenance costs
 The estimated cost of building and implementation is between CAD$50,000.00-$60,000.00
 
-5. Study Bud vs. Alternatives
+6. Study Bud vs. Alternatives
 5.1 Study Bud vs. Tutoring
 Many colleges offer tutoring and students can also engage private tutors when they struggle with a subject. Study Bud provides a better experience than tutoring for the following reasons
 5.1.1 Greater Pool of Collaborators: Tutoring offerings can be limited by the unavailability of tutors for a subject. 
@@ -43,11 +47,11 @@ Study Bud enables face-to-face interaction among users allowing them to discuss 
 The expense of Study Bud is paid by the educational institution the student attends, so it is free of cost for students. 
 5.3.2 Security: Alternative sites to Study Bud are open to all, which one can raise concerns about safety or exposure to potential risk. Study Bud authenticates users using college credentials eliminating/reducing such risks.
 
-6. Revenue Model
+7. Revenue Model
 Study Bud uses a transaction-based revenue model where clients would be required to pay an annual or monthly subscription fee. The fee will depend on the number of users.
 Customization of the tool can also be provided at an additional cost, which would include the cost of the build, and depending on the nature of the customization may also result in an increase in the subscription cost.
 
-7. Functional and Non-Functional Requirements
+8. Functional and Non-Functional Requirements
 7.1 Functional Requirements
 7.1.1 User Login associated with the school’s authentication 
 7.1.2 User Profile to manage the user’s interests
