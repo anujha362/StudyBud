@@ -8,9 +8,7 @@ Students entering college from high-school or re-entering an educational environ
 Other study collaboration websites require student to pay for their services, which can be hard on a student’s limited budget. Many such websites are open to everyone, so can give rise to concerns with security and safety. It can take a lot of time for a student to find a suitable study collaboration platform and even when they find a platform that works for them, they then have to spend time searching for someone with similar learning goals to match with.
 
 3. Benefits of Study Bud
-   
 3.1 Benefits to Students
-
 3.1.1 Creates a sense of Community: the platform allows students to interact with peers and develop a supportive community.
 3.1.2 Knowledge Expansion: Provides students with the opportunity to collaborate, share ideas and expand their knowledge.
 3.1.3 Improves Confidence: As students grow their knowledge, their confidence will improve. 
